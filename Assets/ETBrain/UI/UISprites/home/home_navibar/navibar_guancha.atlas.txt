@@ -1,0 +1,20 @@
+
+navibar_guancha.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guancha_1
+  rotate: false
+  xy: 2, 2
+  size: 61, 94
+  orig: 61, 94
+  offset: 0, 0
+  index: -1
+yali
+  rotate: false
+  xy: 65, 16
+  size: 65, 80
+  orig: 65, 80
+  offset: 0, 0
+  index: -1

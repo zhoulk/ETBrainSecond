@@ -1,0 +1,69 @@
+
+tumeimei.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tumeimei_qiantui
+  rotate: false
+  xy: 567, 297
+  size: 111, 110
+  orig: 111, 110
+  offset: 0, 0
+  index: -1
+tumeimei_qundi
+  rotate: false
+  xy: 567, 409
+  size: 230, 81
+  orig: 230, 81
+  offset: 0, 0
+  index: -1
+tumeimei_shenti
+  rotate: false
+  xy: 347, 326
+  size: 218, 164
+  orig: 218, 164
+  offset: 0, 0
+  index: -1
+tumeimei_shou1
+  rotate: false
+  xy: 799, 417
+  size: 116, 73
+  orig: 116, 73
+  offset: 0, 0
+  index: -1
+tumeimei_shu
+  rotate: false
+  xy: 2, 2
+  size: 223, 190
+  orig: 223, 190
+  offset: 0, 0
+  index: -1
+tumeimei_tou
+  rotate: false
+  xy: 2, 194
+  size: 343, 296
+  orig: 343, 296
+  offset: 0, 0
+  index: -1
+tumeimei_tui
+  rotate: false
+  xy: 680, 300
+  size: 105, 107
+  orig: 105, 107
+  offset: 0, 0
+  index: -1
+tumeimei_youer
+  rotate: false
+  xy: 347, 239
+  size: 191, 85
+  orig: 191, 85
+  offset: 0, 0
+  index: -1
+tumeimei_zuoer
+  rotate: false
+  xy: 227, 47
+  size: 142, 145
+  orig: 142, 145
+  offset: 0, 0
+  index: -1

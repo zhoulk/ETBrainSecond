@@ -1,0 +1,13 @@
+
+logodiaoluo.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+LOGO
+  rotate: false
+  xy: 2, 2
+  size: 874, 349
+  orig: 874, 349
+  offset: 0, 0
+  index: -1

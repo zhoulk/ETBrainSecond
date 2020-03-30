@@ -1,0 +1,27 @@
+
+navibar_luoji.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+luoji_1
+  rotate: false
+  xy: 2, 20
+  size: 104, 93
+  orig: 104, 93
+  offset: 0, 0
+  index: -1
+luoji_2
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+xionguo
+  rotate: false
+  xy: 108, 44
+  size: 67, 69
+  orig: 67, 69
+  offset: 0, 0
+  index: -1

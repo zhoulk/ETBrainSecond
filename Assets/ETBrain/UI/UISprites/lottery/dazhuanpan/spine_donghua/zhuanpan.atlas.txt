@@ -1,0 +1,132 @@
+
+zhuanpan.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+deng1
+  rotate: false
+  xy: 2, 1232
+  size: 734, 734
+  orig: 734, 734
+  offset: 0, 0
+  index: -1
+deng2
+  rotate: false
+  xy: 2, 496
+  size: 734, 734
+  orig: 734, 734
+  offset: 0, 0
+  index: -1
+jinbiA
+  rotate: false
+  xy: 2, 249
+  size: 321, 245
+  orig: 321, 245
+  offset: 0, 0
+  index: -1
+jinbiA1
+  rotate: false
+  xy: 738, 1506
+  size: 321, 245
+  orig: 321, 245
+  offset: 0, 0
+  index: -1
+jinbiA2
+  rotate: false
+  xy: 2, 2
+  size: 321, 245
+  orig: 321, 245
+  offset: 0, 0
+  index: -1
+jinbiA3
+  rotate: false
+  xy: 325, 249
+  size: 321, 245
+  orig: 321, 245
+  offset: 0, 0
+  index: -1
+jinbiA4
+  rotate: false
+  xy: 738, 1259
+  size: 321, 245
+  orig: 321, 245
+  offset: 0, 0
+  index: -1
+jinbiB
+  rotate: true
+  xy: 1061, 1265
+  size: 235, 190
+  orig: 235, 190
+  offset: 0, 0
+  index: -1
+jinbiB1
+  rotate: true
+  xy: 738, 771
+  size: 235, 190
+  orig: 235, 190
+  offset: 0, 0
+  index: -1
+jinbiB2
+  rotate: true
+  xy: 738, 534
+  size: 235, 190
+  orig: 235, 190
+  offset: 0, 0
+  index: -1
+jinbiB3
+  rotate: true
+  xy: 1274, 1516
+  size: 235, 190
+  orig: 235, 190
+  offset: 0, 0
+  index: -1
+jinbiB4
+  rotate: false
+  xy: 1466, 1563
+  size: 235, 190
+  orig: 235, 190
+  offset: 0, 0
+  index: -1
+zhizhen
+  rotate: true
+  xy: 1403, 1755
+  size: 211, 249
+  orig: 211, 249
+  offset: 0, 0
+  index: -1
+zhizhenguang1
+  rotate: false
+  xy: 1061, 1502
+  size: 211, 249
+  orig: 211, 249
+  offset: 0, 0
+  index: -1
+zhizhenguang2
+  rotate: true
+  xy: 325, 36
+  size: 211, 249
+  orig: 211, 249
+  offset: 0, 0
+  index: -1
+zhizhenguang3
+  rotate: false
+  xy: 738, 1008
+  size: 211, 249
+  orig: 211, 249
+  offset: 0, 0
+  index: -1
+zhizhenguang4
+  rotate: true
+  xy: 1654, 1755
+  size: 211, 249
+  orig: 211, 249
+  offset: 0, 0
+  index: -1
+ziti
+  rotate: false
+  xy: 738, 1753
+  size: 663, 213
+  orig: 663, 213
+  offset: 0, 0
+  index: -1

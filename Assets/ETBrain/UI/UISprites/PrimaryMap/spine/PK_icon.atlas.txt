@@ -1,0 +1,48 @@
+
+PK_icon.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pk_gif1
+  rotate: false
+  xy: 2, 117
+  size: 263, 113
+  orig: 263, 113
+  offset: 0, 0
+  index: -1
+pk_gif2
+  rotate: false
+  xy: 2, 2
+  size: 243, 113
+  orig: 243, 113
+  offset: 0, 0
+  index: -1
+pk_gif3
+  rotate: false
+  xy: 267, 117
+  size: 243, 113
+  orig: 243, 113
+  offset: 0, 0
+  index: -1
+pk_gif4
+  rotate: false
+  xy: 247, 2
+  size: 243, 113
+  orig: 243, 113
+  offset: 0, 0
+  index: -1
+pk_gif5
+  rotate: false
+  xy: 512, 117
+  size: 243, 113
+  orig: 243, 113
+  offset: 0, 0
+  index: -1
+pk_gif6
+  rotate: false
+  xy: 492, 2
+  size: 243, 113
+  orig: 243, 113
+  offset: 0, 0
+  index: -1

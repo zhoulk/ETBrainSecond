@@ -1,0 +1,20 @@
+
+navibar_jiyi.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+jiyi_1
+  rotate: false
+  xy: 2, 2
+  size: 83, 82
+  orig: 83, 82
+  offset: 0, 0
+  index: -1
+shushu
+  rotate: false
+  xy: 87, 12
+  size: 78, 72
+  orig: 78, 72
+  offset: 0, 0
+  index: -1

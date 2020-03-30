@@ -1,0 +1,14 @@
+﻿#	默认配置		
+#	配置项	策划备注	配置值
+	Name		共用版
+	Channel		mobile_nldmx
+	Carrier		ott
+	AppCode		7vGp0ysb
+	Dev.AppCode		BA82NKqN
+	AssetUrl		https://cdn-jiaoyu-nldmx-yidong.vas.lutongnet.com/ggly_NLDMX/NLDMX_Mobile/
+	ImgUrl		http://cdn-jiaoyu-nldmx.vas.lutongnet.com/nldmx-res/
+	Dev.ImgUrl		http://113.108.110.61:62181/nldmx-node-res/
+	EasyUrl		https://api-jiaoyu-brain.vas.lutongnet.com:8887/nldmx-mb-api/
+	Dev.EasyUrl		http://113.108.110.61:62181/mobile-nldmx-easyview-api/
+	UFUrl		http://api-jiaoyu-brain.vas.lutongnet.com:8889/lutong-user-api/
+	Dev.UFUrl		http://119.23.172.90:9099/lutong-user-api/

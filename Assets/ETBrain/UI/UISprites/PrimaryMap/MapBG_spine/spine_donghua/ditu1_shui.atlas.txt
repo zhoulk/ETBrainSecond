@@ -1,0 +1,20 @@
+
+ditu1_shui.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shui1
+  rotate: false
+  xy: 515, 2
+  size: 474, 398
+  orig: 474, 398
+  offset: 0, 0
+  index: -1
+shui2
+  rotate: false
+  xy: 2, 2
+  size: 511, 398
+  orig: 511, 398
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,22 @@
+﻿#	界面配置表					
+#	Id		AssetName	UIGroupName	AllowMultiInstance	PauseCoveredUIForm
+#	int		string	string	bool	bool
+#	界面编号	策划备注	资源名称	界面组名称	是否允许多个界面实例	是否暂停被其覆盖的界面
+	1	弹出框	DialogForm	Default	TRUE	TRUE
+	100	地图页	MapForm	Default	FALSE	TRUE
+	101	首页加载	LoadingForm	Default	FALSE	TRUE
+	102	课程	StageForm	Default	FALSE	TRUE
+	103	登录页	LoginForm	Default	FALSE	FALSE
+	104	主页	HomeForm	Default	FALSE	TRUE
+	105	大转盘	LotteryForm	Default	FALSE	FALSE
+	106	任务	TaskForm	Default	FALSE	FALSE
+	107	订购	OrderForm	Default	FALSE	TRUE
+	108	设置	SetForm	Default	FALSE	FALSE
+	109	个人中心	PhoForm	Default	FALSE	FALSE
+	110	成就	AchievementForm	Default	FALSE	TRUE
+	111	排行	RankForm	Default	FALSE	FALSE
+	112	挑战	PKForm	Default	FALSE	TRUE
+	113	商店	ShopForm	Default	FALSE	FALSE
+	114	日常任务弹窗	DayTaskPopForm	Default	FALSE	FALSE
+	115	日常任务	DayTaskForm	Default	FALSE	TRUE
+	116	游戏	GameForm	Default	FALSE	TRUE

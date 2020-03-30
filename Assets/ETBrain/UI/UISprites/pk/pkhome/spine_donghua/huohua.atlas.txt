@@ -1,0 +1,34 @@
+
+huohua.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+huohua_1
+  rotate: true
+  xy: 635, 367
+  size: 129, 321
+  orig: 129, 321
+  offset: 0, 0
+  index: -1
+huohua_2
+  rotate: false
+  xy: 635, 498
+  size: 488, 420
+  orig: 488, 420
+  offset: 0, 0
+  index: -1
+huohua_3
+  rotate: false
+  xy: 2, 287
+  size: 631, 631
+  orig: 631, 631
+  offset: 0, 0
+  index: -1
+huohua_4
+  rotate: false
+  xy: 2, 2
+  size: 374, 283
+  orig: 374, 283
+  offset: 0, 0
+  index: -1

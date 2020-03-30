@@ -1,0 +1,55 @@
+
+xiongguo.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+xiongguo_2b
+  rotate: false
+  xy: 388, 250
+  size: 315, 236
+  orig: 315, 236
+  offset: 0, 0
+  index: -1
+xiongguo_bing
+  rotate: false
+  xy: 2, 2
+  size: 60, 77
+  orig: 60, 77
+  offset: 0, 0
+  index: -1
+xiongguo_shenti
+  rotate: false
+  xy: 705, 271
+  size: 296, 215
+  orig: 296, 215
+  offset: 0, 0
+  index: -1
+xiongguo_shou
+  rotate: false
+  xy: 2, 81
+  size: 119, 62
+  orig: 119, 62
+  offset: 0, 0
+  index: -1
+xiongguo_shoubi2
+  rotate: false
+  xy: 123, 89
+  size: 51, 54
+  orig: 51, 54
+  offset: 0, 0
+  index: -1
+xiongguo_tou
+  rotate: false
+  xy: 2, 145
+  size: 384, 341
+  orig: 384, 341
+  offset: 0, 0
+  index: -1
+xiongguo_yezi
+  rotate: false
+  xy: 388, 155
+  size: 87, 93
+  orig: 87, 93
+  offset: 0, 0
+  index: -1
