@@ -1,4 +1,6 @@
 ﻿
+using LtFramework.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
@@ -7,21 +9,20 @@ namespace ETBrain
     public class LoginForm: UGuiForm
     {
         private Button mCloseBtn;
-        private Button mWXLoginBtn;
 
         protected internal override void OnInit(object userData)
         {
             base.OnInit(userData);
-            mCloseBtn = CachedTransform.Find("closeBtn").GetComponent<Button>();
-            mWXLoginBtn = CachedTransform.Find("content/login").GetComponent<Button>();
 
-            mCloseBtn.onClick.AddListener(OnCloseClick);
-            mWXLoginBtn.onClick.AddListener(OnWXLoginClick);
+            ButtonOnClick("BtnLogin", OnWXLoginClick);
+            ButtonOnClick("BtnClose", OnCloseClick);
         }
 
         protected internal override void OnOpen(object userData)
         {
             base.OnOpen(userData);
+
+            ButtonDefaultFocus("BtnLogin");
         }
 
         void OnCloseClick()

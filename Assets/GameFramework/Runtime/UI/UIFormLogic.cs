@@ -8,7 +8,7 @@ namespace UnityGameFramework.Runtime
     /// <summary>
     /// 界面逻辑基类。
     /// </summary>
-    public abstract class UIFormLogic : MonoBehaviour
+    public abstract partial class UIFormLogic : MonoBehaviour
     {
         private bool m_Available = false;
         private bool m_Visible = false;
@@ -116,6 +116,8 @@ namespace UnityGameFramework.Runtime
         {
             m_Available = true;
             Visible = true;
+
+            EnableSelect(true);
         }
 
         /// <summary>
@@ -128,6 +130,8 @@ namespace UnityGameFramework.Runtime
             gameObject.SetLayerRecursively(m_OriginalLayer);
             Visible = false;
             m_Available = false;
+
+            EnableSelect(false);
         }
 
         /// <summary>
@@ -175,6 +179,7 @@ namespace UnityGameFramework.Runtime
         /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
         protected internal virtual void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
+            SelectableCtrl.InputUpdate(this);
         }
 
         /// <summary>

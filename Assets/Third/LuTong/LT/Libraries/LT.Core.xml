@@ -1,0 +1,4893 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LT.Core</name>
+    </assembly>
+    <members>
+        <member name="T:LT.App">
+            <summary>
+            IApplication静态类
+            </summary>
+        </member>
+        <member name="E:LT.App.RaiseOnNewApplication">
+            <summary>
+            当新建Application时
+            </summary>
+        </member>
+        <member name="E:LT.App.OnNewApplication">
+            <summary>
+            当新建Application时
+            </summary>
+        </member>
+        <member name="F:LT.App.instance">
+            <summary>
+            Application实例
+            </summary>
+        </member>
+        <member name="P:LT.App.That">
+            <summary>
+            Application实例
+            </summary>
+        </member>
+        <member name="M:LT.App.Terminate">
+            <summary>
+            终止LT框架
+            </summary>
+        </member>
+        <member name="M:LT.App.Register(LT.IServiceProvider)">
+            <summary>
+            注册服务提供者
+            </summary>
+            <param name="provider">服务提供者</param>
+        </member>
+        <member name="M:LT.App.IsRegistered(LT.IServiceProvider)">
+            <summary>
+            服务提供者是否已经注册过
+            </summary>
+            <param name="provider">服务提供者</param>
+            <returns>服务提供者是否已经注册过</returns>
+        </member>
+        <member name="M:LT.App.GetRuntimeId">
+            <summary>
+            获取运行时唯一Id
+            </summary>
+            <returns>运行时的唯一Id</returns>
+        </member>
+        <member name="P:LT.App.IsMainThread">
+            <summary>
+            是否是主线程
+            </summary>
+        </member>
+        <member name="P:LT.App.Version">
+            <summary>
+            框架版本(遵循semver)
+            </summary>
+        </member>
+        <member name="P:LT.App.DebugLevel">
+            <summary>
+            调试等级
+            </summary>
+        </member>
+        <member name="M:LT.App.GetBind(System.String)">
+            <summary>
+            获取服务的绑定数据,如果绑定不存在则返回null
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>服务绑定数据或者null</returns>
+        </member>
+        <member name="M:LT.App.HasBind(System.String)">
+            <summary>
+            是否已经绑定了服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>返回一个bool值代表服务是否被绑定</returns>
+        </member>
+        <member name="M:LT.App.HasInstance(System.String)">
+            <summary>
+            是否已经实例静态化
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>是否已经静态化</returns>
+        </member>
+        <member name="M:LT.App.IsResolved(System.String)">
+            <summary>
+            服务是否已经被解决过
+            </summary>
+            <param name="service">服务名</param>
+            <returns>是否已经被解决过</returns>
+        </member>
+        <member name="M:LT.App.CanMake(System.String)">
+            <summary>
+            是否可以生成服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>是否可以生成服务</returns>
+        </member>
+        <member name="M:LT.App.IsStatic(System.String)">
+            <summary>
+            服务是否是静态化的,如果服务不存在也将返回false
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>是否是静态化的</returns>
+        </member>
+        <member name="M:LT.App.IsAlias(System.String)">
+            <summary>
+            是否是别名
+            </summary>
+            <param name="name">名字</param>
+            <returns>是否是别名</returns>
+        </member>
+        <member name="M:LT.App.Bind(System.String,System.Type,System.Boolean)">
+            <summary>
+            绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否静态化</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Bind(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean)">
+            <summary>
+            绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实体</param>
+            <param name="isStatic">服务是否静态化</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.BindIf(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否是静态的</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.BindIf(System.String,System.Type,System.Boolean,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否是静态的</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Unbind(System.String)">
+            <summary>
+            解除绑定服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+        </member>
+        <member name="M:LT.App.Tag(System.String,System.String[])">
+            <summary>
+            为一个及以上的服务定义一个标记
+            </summary>
+            <param name="tag">标记名</param>
+            <param name="service">服务名</param>
+        </member>
+        <member name="M:LT.App.Tagged(System.String)">
+            <summary>
+            根据标记名生成标记所对应的所有服务实例
+            </summary>
+            <param name="tag">标记名</param>
+            <returns>将会返回标记所对应的所有服务实例</returns>
+        </member>
+        <member name="M:LT.App.Instance(System.String,System.Object)">
+            <summary>
+            静态化一个服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <param name="instance">服务实例</param>
+        </member>
+        <member name="M:LT.App.Release(System.String)">
+            <summary>
+            释放某个静态化实例
+            </summary>
+            <param name="service">服务名或别名</param>
+        </member>
+        <member name="M:LT.App.Make(System.String,System.Object[])">
+            <summary>
+            构造服务
+            </summary>
+            <param name="service">服务名或别名</param>
+            <param name="userParams">用户传入的参数</param>
+            <returns>服务实例，如果构造失败那么返回null</returns>
+        </member>
+        <member name="M:LT.App.Factory(System.String,System.Object[])">
+            <summary>
+            获取一个回调，当执行回调可以生成指定的服务
+            </summary>
+            <param name="service">服务名或别名</param>
+            <param name="userParams">用户提供的参数</param>
+            <returns>回调方案</returns>
+        </member>
+        <member name="M:LT.App.Alias(System.String,System.String)">
+            <summary>
+            为服务设定一个别名
+            </summary>
+            <param name="alias">别名</param>
+            <param name="service">映射到的服务名</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.App.Extend(System.String,System.Func{System.Object,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="service">服务名</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.App.OnResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当服务被解决时触发的事件
+            </summary>
+            <param name="closure">闭包函数</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.App.OnRelease(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="action">处理释放时的回调</param>
+        </member>
+        <member name="M:LT.App.OnAfterResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当服务被解决事件之后的回调
+            </summary>
+            <param name="closure">闭包</param>
+            <returns>当前容器</returns>
+        </member>
+        <member name="M:LT.App.OnFindType(System.Func{System.String,System.Type},System.Int32)">
+            <summary>
+            当查找类型无法找到时会尝试去调用开发者提供的查找类型函数
+            </summary>
+            <param name="func">查找类型的回调</param>
+            <param name="priority">查询优先级(值越小越优先)</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.App.OnRebound(System.String,System.Action{System.Object})">
+            <summary>
+            当一个已经被解决的服务，发生重定义时触发
+            </summary>
+            <param name="service">服务名</param>
+            <param name="callback">回调</param>
+            <returns>服务容器</returns>
+        </member>
+        <member name="M:LT.App.Type2Service(System.Type)">
+            <summary>
+            类型转为服务名
+            </summary>
+            <param name="type">类型</param>
+            <returns>转换后的服务名</returns>
+        </member>
+        <member name="M:LT.App.GetBind``1">
+            <summary>
+            获取服务的绑定数据,如果绑定不存在则返回null
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>服务绑定数据或者null</returns>
+        </member>
+        <member name="M:LT.App.HasInstance``1">
+            <summary>
+            是否已经实例静态化
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>是否已经静态化</returns>
+        </member>
+        <member name="M:LT.App.IsResolved``1">
+            <summary>
+            服务是否已经被解决过
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>是否已经被解决过</returns>
+        </member>
+        <member name="M:LT.App.HasBind``1">
+            <summary>
+            是否已经绑定了服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>代表服务是否被绑定</returns>
+        </member>
+        <member name="M:LT.App.CanMake``1">
+            <summary>
+            是否可以生成服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>服务是否可以被构建</returns>
+        </member>
+        <member name="M:LT.App.IsStatic``1">
+            <summary>
+            服务是否是静态化的,如果服务不存在也将返回false
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>服务是否是静态化的</returns>
+        </member>
+        <member name="M:LT.App.IsAlias``1">
+            <summary>
+            是否是别名
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>是否是别名</returns>
+        </member>
+        <member name="M:LT.App.Alias``2">
+            <summary>
+            为服务设定一个别名
+            </summary>
+            <typeparam name="TAlias">别名</typeparam>
+            <typeparam name="TService">服务名</typeparam>
+        </member>
+        <member name="M:LT.App.Extend(System.String,System.Func{System.Object,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="service">服务名</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.App.Extend``2(System.Func{``1,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.App.Extend``2(System.Func{``1,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.App.Extend``1(System.Func{``0,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的全部服务
+            <para>如果构建的实例符合指定的类型或者接口，那么触发扩展闭包</para>
+            </summary>
+            <typeparam name="TConcrete">实现的类型或接口</typeparam>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.App.Extend``1(System.Func{``0,System.Object})">
+            <summary>
+            扩展容器中的全部服务
+            <para>如果构建的实例符合指定的类型或者接口，那么触发扩展闭包</para>
+            </summary>
+            <typeparam name="TConcrete">实现的类型或接口</typeparam>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.App.Bind``1">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Bind``2">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Bind``1(System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Bind``1(System.Func{System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Bind``1(System.Func{System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Bind(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.BindIf``2">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf``2(LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf``1">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf``1(LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf``1(System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf``1(System.Func{System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf``1(System.Func{System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.BindIf(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.Singleton``2">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Singleton``1">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Singleton``1(System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Singleton``1(System.Func{System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Singleton``1(System.Func{System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.Singleton(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``2">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``2(LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``1">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``1(LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``1(System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``1(System.Func{System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf``1(System.Func{System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.SingletonIf(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.App.Unbind``1">
+            <summary>
+            解除服务绑定
+            </summary>
+            <typeparam name="TService">解除绑定的服务</typeparam>
+        </member>
+        <member name="M:LT.App.Tag``1(System.String)">
+            <summary>
+            为一个服务定义一个标记
+            </summary>
+            <typeparam name="TService">服务</typeparam>
+            <param name="tag">标记名</param>
+        </member>
+        <member name="M:LT.App.Instance``1(System.Object)">
+            <summary>
+            静态化一个服务,实例值会经过解决修饰器
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="instance">实例值</param>
+        </member>
+        <member name="M:LT.App.Release``1">
+            <summary>
+            释放服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+        </member>
+        <member name="M:LT.App.Release(System.Object[]@,System.Boolean)">
+            <summary>
+            根据实例对象释放静态化实例
+            </summary>
+            <param name="instances">需要释放静态化实例对象</param>
+            <param name="reverse">以相反的顺序释放实例</param>
+            <returns>只要有一个没有释放成功那么返回false，<paramref name="instances"/>为没有释放掉的实例</returns>
+        </member>
+        <member name="M:LT.App.Make``1(System.Object[])">
+            <summary>
+            构造一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="userParams">用户参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.App.Make(System.Type,System.Object[])">
+            <summary>
+            构造一个服务
+            </summary>
+            <param name="type">服务类型</param>
+            <param name="userParams">用户提供的参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.App.Factory``1(System.Object[])">
+            <summary>
+            获取一个回调，当执行回调可以生成指定的服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <returns>回调方案</returns>
+        </member>
+        <member name="M:LT.App.OnRelease(System.Action{System.Object})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="callback">处理释放时的回调</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.App.OnRelease``1(System.Action{``0})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="closure">处理释放时的回调</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.App.OnRelease``1(System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="closure">处理释放时的回调</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.App.OnResolving(System.Action{System.Object})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            </summary>
+            <param name="callback">回调函数</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.App.OnResolving``1(System.Action{``0})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            </summary>
+            <param name="closure">回调函数</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.App.OnResolving``1(System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            </summary>
+            <param name="closure">回调函数</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.App.OnAfterResolving(System.Action{System.Object})">
+            <summary>
+            当服务被解决事件之后的回调
+            </summary>
+            <param name="closure">闭包</param>
+            <returns>当前容器</returns>
+        </member>
+        <member name="M:LT.App.OnAfterResolving``1(System.Action{``0})">
+            <summary>
+            当服务被解决事件之后的回调
+            </summary>
+            <typeparam name="TWhere">筛选条件</typeparam>
+            <param name="closure">闭包</param>
+            <returns>当前容器</returns>
+        </member>
+        <member name="M:LT.App.OnAfterResolving``1(System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当服务被解决事件之后的回调
+            </summary>
+            <typeparam name="TWhere">筛选条件</typeparam>
+            <param name="closure">闭包</param>
+            <returns>当前容器</returns>
+        </member>
+        <member name="M:LT.App.Watch``1(System.Action)">
+            <summary>
+            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
+            <param>调用是以依赖注入的形式进行的</param>
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="method">回调</param>
+        </member>
+        <member name="M:LT.App.Watch``1(System.Action{``0})">
+            <summary>
+            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
+            <param>调用是以依赖注入的形式进行的</param>
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="method">回调</param>
+        </member>
+        <member name="M:LT.App.Type2Service``1">
+            <summary>
+            类型转为服务名
+            </summary>
+            <typeparam name="TService">服务类型</typeparam>
+            <returns>服务名</returns>
+        </member>
+        <member name="M:LT.App.On``1(System.Action{``0},System.Int32)">
+            <summary>
+            注册监听器
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <param name="listener">监听器</param>
+            <param name="priority">优先级。值越小事件越早</param>
+        </member>
+        <member name="M:LT.App.Trigger``1(``0)">
+            <summary>
+            发送事件
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <param name="eventArgs">需要被处理的事件对象</param>
+            <returns>返回已发送通过的事件</returns>
+        </member>
+        <member name="M:LT.App.Off``1(System.Action{``0})">
+            <summary>
+            移除事件监听器
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <param name="listener">删除指定的侦听器，否则删除该事件下的所有侦听器。</param>
+        </member>
+        <member name="T:LT.Application">
+            <summary>
+            Application实例类
+            </summary>
+        </member>
+        <member name="F:LT.Application.version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="M:LT.Application.GetVersion">
+            <summary>
+            获取版本号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:LT.Application.loadedProviders">
+            <summary>
+            服务提供者
+            </summary>
+        </member>
+        <member name="F:LT.Application.bootstrapped">
+            <summary>
+            是否已经完成引导程序
+            </summary>
+        </member>
+        <member name="F:LT.Application.inited">
+            <summary>
+            是否已经完成初始化
+            </summary>
+        </member>
+        <member name="F:LT.Application.registering">
+            <summary>
+            是否正在注册中
+            </summary>
+        </member>
+        <member name="F:LT.Application.incrementId">
+            <summary>
+            增量Id
+            </summary>
+        </member>
+        <member name="F:LT.Application.mainThreadId">
+            <summary>
+            主线程ID
+            </summary>
+        </member>
+        <member name="F:LT.Application.dispatcher">
+            <summary>
+            事件系统
+            </summary>
+        </member>
+        <member name="F:LT.Application.debugLevel">
+            <summary>
+            调试等级
+            </summary>
+        </member>
+        <member name="M:LT.Application.#ctor(System.Boolean)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="global">是否将当前实例应用到全局</param>
+        </member>
+        <member name="P:LT.Application.Process">
+            <summary>
+            启动流程
+            </summary>
+        </member>
+        <member name="P:LT.Application.IsMainThread">
+            <summary>
+            是否是主线程
+            </summary>
+        </member>
+        <member name="M:LT.Application.New(System.Boolean)">
+            <summary>
+            构建一个新的Application实例
+            </summary>
+            <param name="global">是否将当前实例应用到全局</param>
+            <returns>Application实例</returns>
+        </member>
+        <member name="M:LT.Application.SetDispatcher(LT.EventDispatcher.IEventDispatcher)">
+            <summary>
+            设置事件调度器
+            </summary>
+            <param name="dispatcher">事件调度器实例</param>
+        </member>
+        <member name="M:LT.Application.Terminate">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Application.Bootstrap(LT.IBootstrap[])">
+            <summary>
+            引导给定的引导类数组。
+            </summary>
+            <param name="bootstraps">给定的引导类</param>
+        </member>
+        <member name="M:LT.Application.Init">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:LT.Application.Register(LT.IServiceProvider,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Application.IsRegistered(LT.IServiceProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Application.InitProvider(LT.IServiceProvider)">
+            <summary>
+            初始化服务提供者
+            </summary>
+            <param name="provider">服务提供者</param>
+        </member>
+        <member name="M:LT.Application.GetRuntimeId">
+            <inheritdoc />
+        </member>
+        <member name="P:LT.Application.Dispatcher">
+            <summary>
+            事件调度器
+            </summary>
+        </member>
+        <member name="P:LT.Application.DebugLevel">
+            <summary>
+            调试等级
+            </summary>
+        </member>
+        <member name="P:LT.Application.Version">
+            <summary>
+            框架版本(遵循semver)
+            </summary>
+        </member>
+        <member name="M:LT.Application.GuardConstruct(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.DebugLevel">
+            <summary>
+            调试等级
+            </summary>
+        </member>
+        <member name="F:LT.DebugLevel.Production">
+            <summary>
+            生产环境(Release)
+            </summary>
+        </member>
+        <member name="F:LT.DebugLevel.Staging">
+            <summary>
+            仿真环境(Test)
+            </summary>
+        </member>
+        <member name="F:LT.DebugLevel.Development">
+            <summary>
+            开发者模式(Editor)
+            </summary>
+        </member>
+        <member name="T:LT.AfterBootEventArgs">
+            <summary>
+            表示bootstrap启动完成
+            </summary>
+        </member>
+        <member name="M:LT.AfterBootEventArgs.#ctor(LT.IApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.AfterInitEventArgs">
+            <summary>
+            表示全部 <see cref="M:LT.IServiceProvider.Init"/> 调用完毕.
+            </summary>
+        </member>
+        <member name="M:LT.AfterInitEventArgs.#ctor(LT.IApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.AfterTerminateEventArgs">
+            <summary>
+            表示框架将要关闭
+            </summary>
+        </member>
+        <member name="M:LT.AfterTerminateEventArgs.#ctor(LT.IApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.ApplicationEventArgs">
+            <summary>
+            代表Application的事件
+            </summary>
+        </member>
+        <member name="M:LT.ApplicationEventArgs.#ctor(LT.IApplication)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="application">Application 实例。</param>
+        </member>
+        <member name="P:LT.ApplicationEventArgs.Application">
+            <summary>
+            获取 Application 实例
+            </summary>
+        </member>
+        <member name="T:LT.BeforeBootEventArgs">
+            <summary>
+            表示bootstrap将被调用
+            </summary>
+        </member>
+        <member name="M:LT.BeforeBootEventArgs.#ctor(LT.IBootstrap[],LT.IApplication)">
+            <summary>
+            表示bootstrap将被调用
+            </summary>
+            <param name="bootstraps">bootstrap数组</param>
+            <param name="application">application实例</param>
+        </member>
+        <member name="M:LT.BeforeBootEventArgs.GetBootstraps">
+            <summary>
+            获取bootstrap数组
+            </summary>
+            <returns>返回bootstrap数组</returns>
+        </member>
+        <member name="M:LT.BeforeBootEventArgs.SetBootstraps(LT.IBootstrap[])">
+            <summary>
+            设置bootstrap数组，替换旧的bootstrap数组
+            </summary>
+            <param name="bootstraps">新的bootstrap数组</param>
+        </member>
+        <member name="T:LT.BeforeInitEventArgs">
+            <summary>
+            表示 <see cref="M:LT.IServiceProvider.Init"/> 方法将被调用.
+            </summary>
+        </member>
+        <member name="M:LT.BeforeInitEventArgs.#ctor(LT.IApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.BeforeTerminateEventArgs">
+            <summary>
+            表示框架将被关闭
+            </summary>
+        </member>
+        <member name="M:LT.BeforeTerminateEventArgs.#ctor(LT.IApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.BootingEventArgs">
+            <summary>
+            表示一个bootstrap类正在引导中。
+            </summary>
+        </member>
+        <member name="M:LT.BootingEventArgs.#ctor(LT.IBootstrap,LT.IApplication)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="bootstrap">正在引导的bootstrap</param>
+            <param name="application">application 实例</param>
+        </member>
+        <member name="P:LT.BootingEventArgs.IsSkip">
+            <summary>
+            是否跳过
+            </summary>
+        </member>
+        <member name="M:LT.BootingEventArgs.GetBootstrap">
+             <summary>
+            获取正在引导的bootstrap
+             </summary>
+             <returns>返回正在引导的bootstrap</returns>
+        </member>
+        <member name="M:LT.BootingEventArgs.Skip">
+            <summary>
+            禁用引导
+            </summary>
+        </member>
+        <member name="M:LT.BootingEventArgs.IsPropagationStopped">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.InitProviderEventArgs">
+            <summary>
+            表示一个 ServiceProvider 被初始化
+            </summary>
+        </member>
+        <member name="M:LT.InitProviderEventArgs.#ctor(LT.IServiceProvider,LT.IApplication)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="provider">被初始化的ServiceProvider</param>
+            <param name="application">application 实例</param>
+        </member>
+        <member name="M:LT.InitProviderEventArgs.GetServiceProvider">
+            <summary>
+            获取被初始化的ServiceProvider
+            </summary>
+            <returns>返回被初始化的ServiceProvider</returns>
+        </member>
+        <member name="T:LT.RegisterProviderEventArgs">
+            <summary>
+            表示ServiceProvider被注册
+            </summary>
+        </member>
+        <member name="M:LT.RegisterProviderEventArgs.#ctor(LT.IServiceProvider,LT.IApplication)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="provider">被注册的ServiceProvider</param>
+            <param name="application">application 实例</param>
+        </member>
+        <member name="P:LT.RegisterProviderEventArgs.IsSkip">
+            <summary>
+            是否跳过注册
+            </summary>
+        </member>
+        <member name="M:LT.RegisterProviderEventArgs.GetServiceProvider">
+            <summary>
+            获取将被注册的ServiceProvider
+            </summary>
+            <returns>返回将被注册的ServiceProvider</returns>
+        </member>
+        <member name="M:LT.RegisterProviderEventArgs.Skip">
+            <summary>
+            跳过注册
+            </summary>
+        </member>
+        <member name="M:LT.RegisterProviderEventArgs.IsPropagationStopped">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.StartCompletedEventArgs">
+            <summary>
+            表示框架准备完成
+            </summary>
+        </member>
+        <member name="M:LT.StartCompletedEventArgs.#ctor(LT.IApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.Facade`1">
+            <summary>
+            门面
+            </summary>
+        </member>
+        <member name="M:LT.Facade`1.#cctor">
+            <summary>
+            门面静态构造
+            </summary>
+        </member>
+        <member name="P:LT.Facade`1.That">
+            <summary>
+            门面实例
+            </summary>
+        </member>
+        <member name="P:LT.Facade`1.HasInstance">
+            <summary>
+            是否拥有门面实例
+            <para>如果为非静态绑定那么永远返回<code>false</code></para>
+            <para>门面实例判断不能代替:<code>Container.HasInstance</code></para>
+            </summary>
+        </member>
+        <member name="M:LT.Facade`1.Make(System.Object[])">
+            <summary>
+            构建一个服务实例
+            </summary>
+            <param name="userParams">用户参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Facade`1.Resolve(System.Object[])">
+            <summary>
+            构建一个服务
+            </summary>
+        </member>
+        <member name="M:LT.Facade`1.OnRelease(LT.Container.IBindData,System.Object)">
+            <summary>
+            当服务被释放时
+            </summary>
+            <param name="oldBinder">旧的绑定器</param>
+            <param name="_">忽略的参数</param>
+        </member>
+        <member name="M:LT.Facade`1.ServiceRebound(`0)">
+            <summary>
+            当服务被重绑定时
+            </summary>
+            <param name="newService">新的服务实例</param>
+        </member>
+        <member name="M:LT.Facade`1.Rebind(LT.Container.IBindData)">
+            <summary>
+            重新绑定
+            </summary>
+            <param name="newBinder">新的Binder</param>
+        </member>
+        <member name="M:LT.Facade`1.Build(System.Object[])">
+            <summary>
+            生成服务
+            </summary>
+            <param name="userParams">服务名</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="T:LT.IApplication">
+            <summary>
+            应用程序接口
+            </summary>
+        </member>
+        <member name="M:LT.IApplication.Register(LT.IServiceProvider,System.Boolean)">
+            <summary>
+            注册服务提供者
+            </summary>
+            <param name="provider">服务提供者</param>
+            <param name="force">为true则强制注册</param>
+        </member>
+        <member name="M:LT.IApplication.IsRegistered(LT.IServiceProvider)">
+            <summary>
+            服务提供者是否已经注册过
+            </summary>
+            <param name="provider">服务提供者</param>
+            <returns>服务提供者是否已经注册过</returns>
+        </member>
+        <member name="M:LT.IApplication.GetRuntimeId">
+            <summary>
+            获取程序运行时唯一Id
+            </summary>
+            <returns>运行时的唯一Id</returns>
+        </member>
+        <member name="P:LT.IApplication.IsMainThread">
+            <summary>
+            是否是主线程
+            </summary>
+        </member>
+        <member name="P:LT.IApplication.DebugLevel">
+            <summary>
+            调试等级
+            </summary>
+        </member>
+        <member name="M:LT.IApplication.Terminate">
+            <summary>
+            终止框架
+            </summary>
+        </member>
+        <member name="T:LT.IBootstrap">
+            <summary>
+            引导程序接口
+            </summary>
+        </member>
+        <member name="M:LT.IBootstrap.Bootstrap">
+            <summary>
+            引导程序接口
+            </summary>
+        </member>
+        <member name="T:LT.IServiceProvider">
+            <summary>
+            <see cref ="T:LT.IServiceProvider"/>是所有服务提供者类实现的接口。
+            胶水层代码，主要作用为注册服务到容器,以及处理一些服务初始化的工作
+            </summary>
+        </member>
+        <member name="M:LT.IServiceProvider.Register">
+            <summary>
+            注册服务提供者
+            </summary>
+        </member>
+        <member name="M:LT.IServiceProvider.Init">
+            <summary>
+            服务提供者初始化
+            </summary>
+        </member>
+        <member name="T:LT.ServiceProvider">
+            <summary>
+            默认服务提供者(即非可视化服务)
+            </summary>
+        </member>
+        <member name="M:LT.ServiceProvider.Register">
+            <summary>
+            当注册服务提供者
+            </summary>
+        </member>
+        <member name="M:LT.ServiceProvider.Init">
+            <summary>
+            服务提供者初始化
+            </summary>
+        </member>
+        <member name="T:LT.StartProcess">
+            <summary>
+            框架启动流程
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Construct">
+            <summary>
+            构建阶段
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Bootstrap">
+            <summary>
+            引导流程之前
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Bootstrapping">
+            <summary>
+            引导流程进行中
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Bootstraped">
+            <summary>
+            引导流程结束之后
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Init">
+            <summary>
+            初始化开始之前
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Initing">
+            <summary>
+            初始化中
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Inited">
+            <summary>
+            初始化完成后
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Running">
+            <summary>
+            框架运行中
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Terminate">
+            <summary>
+            框架终止之前
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Terminating">
+            <summary>
+            框架终止进行中
+            </summary>
+        </member>
+        <member name="F:LT.StartProcess.Terminated">
+            <summary>
+            框架终止之后
+            </summary>
+        </member>
+        <member name="T:LT.AsyncLTTaskMethodBuilder">
+            <summary>
+            Represents a builder for asynchronous methods that return a lttask
+            </summary>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.Create">
+            <summary>Creates an instance of the <see cref="T:LT.AsyncLTTaskMethodBuilder" /> class.</summary>
+            <returns>A new instance of the builder.</returns>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.Start``1(``0@)">
+            <summary>
+            Begins running the builder with the associated state machine.
+            </summary>
+            <typeparam name="TStateMachine">The type of the state machine.</typeparam>
+            <param name="stateMachine">The state machine instance, passed by reference.</param>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)">
+            <summary>
+            Associates the builder with the specified state machine.
+            </summary>
+            <param name="stateMachine">The state machine instance to associate with the builder.</param>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.AwaitOnCompleted``2(``0@,``1@)">
+            <summary>
+            Schedules the state machine to proceed to the next action when the specified awaiter completes.
+            </summary>
+            <typeparam name="TAwaiter">The awaiter.</typeparam>
+            <typeparam name="TStateMachine">The state machine.</typeparam>
+            <param name="awaiter">The type of the awaiter.</param>
+            <param name="stateMachine">The type of the state machine.</param>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.AwaitUnsafeOnCompleted``2(``0@,``1@)">
+            <summary>
+            Schedules the state machine to proceed to the next action when the specified awaiter completes. This method can be called from partially trusted code.
+            </summary>
+            <typeparam name="TAwaiter">The awaiter.</typeparam>
+            <typeparam name="TStateMachine">The state machine.</typeparam>
+            <param name="awaiter">The type of the awaiter.</param>
+            <param name="stateMachine">The type of the state machine.</param>
+        </member>
+        <member name="P:LT.AsyncLTTaskMethodBuilder.Task">
+            <summary>
+            Gets the task for this builder.
+            </summary>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.SetResult">
+            <summary>
+            Marks the task as successfully completed.
+            </summary>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder.SetException(System.Exception)">
+            <summary>
+            Marks the task as failed and binds the specified exception to the task.
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="T:LT.AsyncLTTaskMethodBuilder`1">
+            <summary>
+            Represents a builder for asynchronous methods that return a lttask
+            </summary>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.Create">
+            <summary>Creates an instance of the <see cref="T:LT.AsyncLTTaskMethodBuilder" /> class.</summary>
+            <returns>A new instance of the builder.</returns>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.Start``1(``0@)">
+            <summary>
+            Begins running the builder with the associated state machine.
+            </summary>
+            <typeparam name="TStateMachine">The type of the state machine.</typeparam>
+            <param name="stateMachine">The state machine instance, passed by reference.</param>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)">
+            <summary>
+            Associates the builder with the specified state machine.
+            </summary>
+            <param name="stateMachine">The state machine instance to associate with the builder.</param>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.AwaitOnCompleted``2(``0@,``1@)">
+            <summary>
+            Schedules the state machine to proceed to the next action when the specified awaiter completes.
+            </summary>
+            <typeparam name="TAwaiter">The awaiter.</typeparam>
+            <typeparam name="TStateMachine">The state machine.</typeparam>
+            <param name="awaiter">The type of the awaiter.</param>
+            <param name="stateMachine">The type of the state machine.</param>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.AwaitUnsafeOnCompleted``2(``0@,``1@)">
+            <summary>
+            Schedules the state machine to proceed to the next action when the specified awaiter completes. This method can be called from partially trusted code.
+            </summary>
+            <typeparam name="TAwaiter">The awaiter.</typeparam>
+            <typeparam name="TStateMachine">The state machine.</typeparam>
+            <param name="awaiter">The type of the awaiter.</param>
+            <param name="stateMachine">The type of the state machine.</param>
+        </member>
+        <member name="P:LT.AsyncLTTaskMethodBuilder`1.Task">
+            <summary>
+            Gets the task for this builder.
+            </summary>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.SetResult(`0)">
+            <summary>
+            Marks the task as successfully completed.
+            </summary>
+        </member>
+        <member name="M:LT.AsyncLTTaskMethodBuilder`1.SetException(System.Exception)">
+            <summary>
+            Marks the task as failed and binds the specified exception to the task.
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="T:LT.IAwaitable`1">
+            <summary>
+            等待接口
+            </summary>
+            <typeparam name="TAwaiter">等待器</typeparam>
+        </member>
+        <member name="T:LT.IAwaitable`2">
+            <summary>
+            等待接口
+            </summary>
+            <typeparam name="TAwaiter">等待器</typeparam>
+            <typeparam name="TResult">等待返回结果</typeparam>
+        </member>
+        <member name="T:LT.AwaiterStatus">
+            <summary>
+            等待器状态
+            </summary>
+        </member>
+        <member name="F:LT.AwaiterStatus.Pending">
+            <summary>The operation has not yet completed.</summary>
+        </member>
+        <member name="F:LT.AwaiterStatus.Succeeded">
+            <summary>The operation completed successfully.</summary>
+        </member>
+        <member name="F:LT.AwaiterStatus.Faulted">
+            <summary>The operation completed with an error.</summary>
+        </member>
+        <member name="F:LT.AwaiterStatus.Canceled">
+            <summary>The operation completed due to cancellation.</summary>
+        </member>
+        <member name="T:LT.IAwaiter">
+            <summary>
+            等待器
+            </summary>
+        </member>
+        <member name="T:LT.IAwaiter`1">
+            <summary>
+            等待器
+            </summary>
+            <typeparam name="TResult">等待返回结果</typeparam>
+        </member>
+        <member name="T:LT.AwaiterStatusExtensions">
+            <summary>
+            等待器扩展
+            </summary>
+        </member>
+        <member name="M:LT.AwaiterStatusExtensions.IsCompleted(LT.AwaiterStatus)">
+            <summary>!= Pending.</summary>
+        </member>
+        <member name="M:LT.AwaiterStatusExtensions.IsCompletedSuccessfully(LT.AwaiterStatus)">
+            <summary>== Succeeded.</summary>
+        </member>
+        <member name="M:LT.AwaiterStatusExtensions.IsCanceled(LT.AwaiterStatus)">
+            <summary>== Canceled.</summary>
+        </member>
+        <member name="M:LT.AwaiterStatusExtensions.IsFaulted(LT.AwaiterStatus)">
+            <summary>== Faulted.</summary>
+        </member>
+        <member name="T:LT.LTTask">
+            <summary>
+            轻量级Task
+            </summary>
+            <summary>
+            LTTask扩展
+            </summary>
+        </member>
+        <member name="T:LT.LTTask`1">
+            <summary>
+            轻量级Task
+            </summary>
+        </member>
+        <member name="T:LT.LTTaskAwaiter">
+            <summary>
+            LTTask等待器
+            </summary>
+        </member>
+        <member name="T:LT.LTTaskAwaiter`1">
+            <summary>
+            LTTask等待器
+            </summary>
+        </member>
+        <member name="T:LT.LTTaskCompletionSource">
+            <summary>
+            任务完成源，用于等待由用户决定返回结果时机的地方
+            </summary>
+            <summary>
+            LTTaskCompletionSource扩展
+            </summary>
+        </member>
+        <member name="T:LT.LTTaskCompletionSource`1">
+            <summary>
+            任务完成源，用于等待由用户决定返回结果时机的地方
+            </summary>
+        </member>
+        <member name="T:LT.Container.Bindable">
+            <summary>
+            绑定与指定服务相关联的数据。
+            </summary>
+        </member>
+        <member name="P:LT.Container.Bindable.Service">
+            <summary>
+            当前绑定的名字
+            </summary>
+        </member>
+        <member name="P:LT.Container.Bindable.Container">
+            <summary>
+            所属服务容器
+            </summary>
+        </member>
+        <member name="F:LT.Container.Bindable.InternalContainer">
+            <summary>
+            父级容器
+            </summary>
+        </member>
+        <member name="F:LT.Container.Bindable.contextual">
+            <summary>
+            服务关系上下文
+            当前服务需求某个服务时可以指定给与什么服务
+            </summary>
+        </member>
+        <member name="F:LT.Container.Bindable.contextualClosure">
+            <summary>
+            服务上下文闭包
+            当前服务需求某个服务时给定的闭包
+            </summary>
+        </member>
+        <member name="F:LT.Container.Bindable.SyncRoot">
+            <summary>
+            同步锁
+            </summary>
+        </member>
+        <member name="F:LT.Container.Bindable.isDestroy">
+            <summary>
+            是否被释放
+            </summary>
+        </member>
+        <member name="M:LT.Container.Bindable.#ctor(LT.Container.Container,System.String)">
+            <summary>
+            构建一个绑定数据
+            </summary>
+            <param name="container">依赖注入容器</param>
+            <param name="service">服务名</param>
+        </member>
+        <member name="M:LT.Container.Bindable.Unbind">
+            <summary>
+            解除绑定
+            </summary>
+        </member>
+        <member name="M:LT.Container.Bindable.AddContextual(System.String,System.String)">
+            <summary>
+            为服务增加上下文
+            </summary>
+            <param name="needs">需求什么服务</param>
+            <param name="given">给与什么服务</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.Bindable.AddContextual(System.String,System.Func{System.Object})">
+            <summary>
+            为服务增加上下文
+            </summary>
+            <param name="needs">需求什么服务</param>
+            <param name="given">给与什么服务</param>
+        </member>
+        <member name="M:LT.Container.Bindable.GetContextual(System.String)">
+            <summary>
+            获取上下文的需求关系
+            </summary>
+            <param name="needs">需求的服务</param>
+            <returns>给与的服务</returns>
+        </member>
+        <member name="M:LT.Container.Bindable.GetContextualClosure(System.String)">
+            <summary>
+            获取上下文关系闭包实现
+            </summary>
+            <param name="needs">需求的服务</param>
+            <returns>给与的闭包</returns>
+        </member>
+        <member name="M:LT.Container.Bindable.ReleaseBind">
+            <summary>
+            解除绑定
+            </summary>
+        </member>
+        <member name="M:LT.Container.Bindable.AssertDestroyed">
+            <summary>
+            验证当前实例是否被释放
+            </summary>
+        </member>
+        <member name="T:LT.Container.Bindable`1">
+            <inheritdoc />
+        </member>
+        <member name="F:LT.Container.Bindable`1.given">
+            <summary>
+            服务所需的数据
+            </summary>
+        </member>
+        <member name="M:LT.Container.Bindable`1.#ctor(LT.Container.Container,System.String)">
+            <summary>
+            构建 <see cref="T:LT.Container.Bindable`1"/>
+            </summary>
+            <param name="container">容器实例</param>
+            <param name="service">服务名</param>
+        </member>
+        <member name="M:LT.Container.Bindable`1.Needs(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Bindable`1.Needs``1">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.Container.BindData">
+            <summary>
+            服务绑定的数据
+            </summary>    
+        </member>
+        <member name="F:LT.Container.BindData.resolving">
+            <summary>
+            服务被构建时的回调
+            </summary>
+        </member>
+        <member name="F:LT.Container.BindData.afterResolving">
+            <summary>
+            服务被构建后的回调
+            </summary>
+        </member>
+        <member name="F:LT.Container.BindData.release">
+            <summary>
+            服务被释放时的回调
+            </summary>
+        </member>
+        <member name="M:LT.Container.BindData.#ctor(LT.Container.Container,System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean)">
+            <summary>
+            构建 <see cref="T:LT.Container.BindData"/> 实例.
+            </summary>
+            <param name="container">服务父级容器</param>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否是静态的</param>
+        </member>
+        <member name="P:LT.Container.BindData.Concrete">
+            <summary>
+            服务实现，执行这个委托将会获得服务实例
+            </summary>
+        </member>
+        <member name="P:LT.Container.BindData.IsStatic">
+            <summary>
+            当前绑定的服务是否是静态服务
+            </summary>
+        </member>
+        <member name="M:LT.Container.BindData.Alias(System.String)">
+            <summary>
+            为服务设定一个别名
+            </summary>
+            <param name="alias">别名</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.BindData.Tag(System.String)">
+            <summary>
+            为服务打上一个标签
+            </summary>
+            <param name="tag">标签名</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.BindData.OnResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.BindData.OnAfterResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            解决服务时事件之后的回调
+            </summary>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.BindData.OnRelease(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="closure">处理事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.BindData.ReleaseBind">
+            <summary>
+            移除绑定服务 , 在解除绑定时如果是静态化物体将会触发释放
+            </summary>
+        </member>
+        <member name="M:LT.Container.BindData.TriggerResolving(System.Object)">
+            <summary>
+            触发服务构建事件
+            </summary>
+            <param name="instance">服务实例</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.BindData.TriggerAfterResolving(System.Object)">
+            <summary>
+            触发服务构建事件之后的回调
+            </summary>
+            <param name="instance">服务实例</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.BindData.TriggerRelease(System.Object)">
+            <summary>
+            触发服务释放
+            </summary>
+            <param name="instance">服务实例</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.BindData.AddClosure(System.Action{LT.Container.IBindData,System.Object},System.Collections.Generic.List{System.Action{LT.Container.IBindData,System.Object}}@)">
+            <summary>
+            增加一个事件
+            </summary>
+            <param name="closure">闭包</param>
+            <param name="list">事件列表</param>
+        </member>
+        <member name="T:LT.Container.Container">
+            <summary>
+             依赖注入容器
+             </summary>
+        </member>
+        <member name="F:LT.Container.Container.ServiceBanChars">
+            <summary>
+            服务禁用字符
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.binds">
+            <summary>
+            服务所绑定的相关数据，记录了服务的关系
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.instances">
+            <summary>
+             如果所属服务是静态的那么构建后将会储存在这里
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.instancesReverse">
+            <summary>
+            单例化对象的反查表
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.aliases">
+            <summary>
+             服务的别名(key: 别名 , value: 映射的服务名)
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.aliasesReverse">
+            <summary>
+            可以通过服务的真实名字来查找别名
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.tags">
+            <summary>
+            服务标记，一个标记允许标记多个服务
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.resolving">
+            <summary>
+            服务构建时的回调
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.afterResloving">
+            <summary>
+            在服务构建修饰器之后的回调
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.release">
+            <summary>
+            静态服务释放时的回调
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.extenders">
+            <summary>
+            全局服务扩展方法
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.findType">
+            <summary>
+            类型查询回调
+            当类型无法被构建时会尝试去开发者提供的查询器中查询类型
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.findTypeCache">
+            <summary>
+            类型查询回调缓存
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.resolved">
+            <summary>
+            已经被构建过的服务名
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.instanceTiming">
+            <summary>
+            单例服务构建时序
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.rebound">
+            <summary>
+            重定义事件
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.syncRoot">
+            <summary>
+            同步锁
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.injectTarget">
+            <summary>
+            注入目标
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.flushing">
+            <summary>
+            是否在清空过程中
+            </summary>
+        </member>
+        <member name="F:LT.Container.Container.instanceId">
+            <summary>
+            单例化Id
+            </summary>
+        </member>
+        <member name="M:LT.Container.Container.#ctor(System.Int32)">
+            <summary>
+            构造一个容器
+            </summary>
+            <param name="prime">初始预计服务数量</param>
+        </member>
+        <member name="P:LT.Container.Container.BuildStack">
+            <summary>
+            编译堆栈
+            </summary>
+        </member>
+        <member name="P:LT.Container.Container.UserParamsStack">
+            <summary>
+            用户参数堆栈
+            </summary>
+        </member>
+        <member name="P:LT.Container.Container.Item(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.Tag(System.String,System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.Tagged(System.String)">
+            <summary>
+            根据标记名生成标记所对应的所有服务实例
+            </summary>
+            <param name="tag">标记名</param>
+            <returns>将会返回标记所对应的所有服务实例</returns>
+            <exception cref="T:LT.LogicException"><paramref name="tag"/>不存在</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="tag"/>为<c>null</c>或者空字符串</exception>
+        </member>
+        <member name="M:LT.Container.Container.GetBind(System.String)">
+            <summary>
+            获取服务的绑定数据,如果绑定不存在则返回null（只有进行过bind才视作绑定）
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>服务绑定数据或者null</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="service"/>为<c>null</c>或者空字符串</exception>
+        </member>
+        <member name="M:LT.Container.Container.HasBind(System.String)">
+            <summary>
+            是否已经绑定了服务
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>服务是否被绑定</returns>
+        </member>
+        <member name="M:LT.Container.Container.HasInstance(System.String)">
+            <summary>
+            是否已经实例静态化
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>是否已经静态化</returns>
+        </member>
+        <member name="M:LT.Container.Container.IsResolved(System.String)">
+            <summary>
+            服务是否已经被构建过
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>是否已经被构建过</returns>
+        </member>
+        <member name="M:LT.Container.Container.CanMake(System.String)">
+            <summary>
+            是否可以生成服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>是否可以生成服务</returns>
+        </member>
+        <member name="M:LT.Container.Container.IsStatic(System.String)">
+            <summary>
+            服务是否是静态化的,如果服务不存在也将返回false
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>是否是静态化的</returns>
+        </member>
+        <member name="M:LT.Container.Container.IsAlias(System.String)">
+            <summary>
+            是否是别名
+            </summary>
+            <param name="name">名字</param>
+            <returns>是否是别名</returns>
+        </member>
+        <member name="M:LT.Container.Container.Alias(System.String,System.String)">
+            <summary>
+            以全局的方式为服务设定一个别名
+            </summary>
+            <param name="alias">别名</param>
+            <param name="service">映射到的服务名</param>
+            <returns>当前容器对象</returns>
+            <exception cref="T:LT.LogicException"><paramref name="alias"/>别名冲突或者<paramref name="service"/>的绑定与实例都不存在</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="alias"/>,<paramref name="service"/>为<c>null</c>或者空字符串</exception>
+        </member>
+        <member name="M:LT.Container.Container.BindIf(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否是静态的</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.Container.BindIf(System.String,System.Type,System.Boolean,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务类型</param>
+            <param name="isStatic">服务是否是静态的</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.Container.Bind(System.String,System.Type,System.Boolean)">
+            <summary>
+            绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务类型</param>
+            <param name="isStatic">服务是否静态化</param>
+            <returns>服务绑定数据</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="concrete"/>为<c>null</c>或者空字符串</exception>
+        </member>
+        <member name="M:LT.Container.Container.Bind(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean)">
+            <summary>
+            绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否静态化</param>
+            <returns>服务绑定数据</returns>
+            <exception cref="T:LT.LogicException"><paramref name="service"/>绑定冲突</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="concrete"/>为<c>null</c></exception>
+        </member>
+        <member name="M:LT.Container.Container.Make(System.String,System.Object[])">
+            <summary>
+            构造服务
+            </summary>
+            <param name="service">服务名或别名</param>
+            <param name="userParams">用户传入的构造参数</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="service"/>为<c>null</c>或者空字符串</exception>
+            <exception cref="T:LT.LogicException">出现循环依赖</exception>
+            <returns>服务实例，如果构造失败那么返回null</returns>
+        </member>
+        <member name="M:LT.Container.Container.Extend(System.String,System.Func{System.Object,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="service">服务名或别名,如果为null则意味着全局有效</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.Container.ClearExtenders(System.String)">
+            <summary>
+            移除指定服务的全部扩展
+            </summary>
+            <param name="service">服务名或别名</param>
+        </member>
+        <member name="M:LT.Container.Container.Instance(System.String,System.Object)">
+            <summary>
+            静态化一个服务,实例值会经过构建回调事件
+            </summary>
+            <param name="service">服务名或别名</param>
+            <param name="instance">服务实例，<c>null</c>也是合法的实例值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="service"/>为<c>null</c>或者空字符串</exception>
+            <exception cref="T:LT.LogicException"><paramref name="service"/>的服务在绑定设置中不是静态的</exception>
+            <returns>被修饰器处理后的新的实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.Release(System.Object)">
+            <summary>
+            释放静态化实例
+            </summary>
+            <param name="mixed">服务名或别名或单例化的对象</param>
+            <returns>是否完成了释放</returns>
+        </member>
+        <member name="M:LT.Container.Container.OnFindType(System.Func{System.String,System.Type},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.OnRelease(System.Action{LT.Container.IBindData,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.OnResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.OnAfterResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.OnRebound(System.String,System.Action{System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.Container.Unbind(System.String)">
+            <summary>
+            解除绑定服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+        </member>
+        <member name="M:LT.Container.Container.Flush">
+            <summary>
+            清空容器的所有实例，绑定，别名，标签，构建器，方法容器, 扩展
+            </summary>
+        </member>
+        <member name="M:LT.Container.Container.Type2Service(System.Type)">
+            <summary>
+            将类型转为服务名
+            </summary>
+            <param name="type">类型</param>
+            <returns>服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.Unbind(LT.Container.IBindable)">
+            <summary>
+            解除绑定服务
+            </summary>
+            <param name="bindable">绑定关系</param>
+        </member>
+        <member name="M:LT.Container.Container.IsBasicType(System.Type)">
+            <summary>
+            是否是依赖注入容器默认的基础类型
+            </summary>
+            <param name="type">基础类型</param>
+            <returns>是否是基础类型</returns>
+        </member>
+        <member name="M:LT.Container.Container.IsUnableType(System.Type)">
+            <summary>
+            是否是无法被构建的类型
+            </summary>
+            <param name="type">类型</param>
+            <returns>是否可以被构建</returns>
+        </member>
+        <member name="M:LT.Container.Container.WrapperTypeBuilder(System.String,System.Type)">
+            <summary>
+            包装类型，使可以被用来构建服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">类型</param>
+            <returns>根据类型生成的服务</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetDependenciesFromUserParams(System.Reflection.ParameterInfo,System.Object[]@)">
+            <summary>
+            从用户传入的参数中获取依赖
+            </summary>
+            <param name="baseParam">基础参数</param>
+            <param name="userParams">用户传入参数</param>
+            <returns>合适的注入参数</returns>
+        </member>
+        <member name="M:LT.Container.Container.ChangeType(System.Object@,System.Type)">
+            <summary>
+            转换参数类型
+            </summary>
+            <param name="result">需要转换的参数</param>
+            <param name="conversionType">转换到的类型</param>
+            <returns>是否转换成功</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetPropertyNeedsService(System.Reflection.PropertyInfo)">
+            <summary>
+            获取字段需求服务
+            </summary>
+            <param name="property">字段</param>
+            <returns>需求的服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetParamNeedsService(System.Reflection.ParameterInfo)">
+            <summary>
+            获取参数需求服务
+            </summary>
+            <param name="baseParam">当前正在构建的变量</param>
+            <returns>需求的服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetContextualClosure(LT.Container.Bindable,System.String,System.String)">
+            <summary>
+            根据上下文获取相关的构建闭包
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">构建的服务名</param>
+            <param name="paramName">目标参数的名字</param>
+            <returns>构建闭包</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetContextualService(LT.Container.Bindable,System.String,System.String)">
+            <summary>
+            根据上下文获取相关的需求服务
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">构建的服务名</param>
+            <param name="paramName">目标参数的名字</param>
+            <returns>需求的服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeFromContextualClosure(System.Func{System.Object},System.Type,System.Object@)">
+            <summary>
+            从上下文闭包中进行构建获得实例
+            </summary>
+            <param name="closure">上下文闭包</param>
+            <param name="needType">参数需求的类型</param>
+            <param name="ouput">构建的实例</param>
+            <returns>是否成功构建</returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeFromContextualService(System.String,System.Type,System.Object@)">
+            <summary>
+            从上下文关系的服务名获取服务实现
+            </summary>
+            <param name="service">上下文关系的服务名</param>
+            <param name="needType">参数需求类型</param>
+            <param name="output">构建的实例</param>
+            <returns>是否成功构建</returns>
+        </member>
+        <member name="M:LT.Container.Container.ResloveFromContextual(LT.Container.Bindable,System.String,System.String,System.Type,System.Object@)">
+            <summary>
+            根据上下文来构建指定需求的服务
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">构建的服务名字</param>
+            <param name="paramName">目标参数的名字</param>
+            <param name="paramType">目标参数的类型</param>
+            <param name="output">构建的实例</param>
+            <returns>是否成功通过上下文构建</returns>
+        </member>
+        <member name="M:LT.Container.Container.ResolveAttrPrimitive(LT.Container.Bindable,System.String,System.Reflection.PropertyInfo)">
+            <summary>
+            构建基本类型
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">希望构建的服务名或者别名</param>
+            <param name="baseParam">当前正在构建的变量</param>
+            <returns>构建结果</returns>
+        </member>
+        <member name="M:LT.Container.Container.ResloveAttrClass(LT.Container.Bindable,System.String,System.Reflection.PropertyInfo)">
+            <summary>
+            构建类类型
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">希望构建的服务名或者别名</param>
+            <param name="baseParam">当前正在构建的变量</param>
+            <returns>构建结果</returns>
+        </member>
+        <member name="M:LT.Container.Container.ResolvePrimitive(LT.Container.Bindable,System.String,System.Reflection.ParameterInfo)">
+            <summary>
+            构建基本类型
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">希望构建的服务名或者别名</param>
+            <param name="baseParam">当前正在构建的变量</param>
+            <returns>构建结果</returns>
+        </member>
+        <member name="M:LT.Container.Container.ResloveClass(LT.Container.Bindable,System.String,System.Reflection.ParameterInfo)">
+            <summary>
+            构建类类型
+            </summary>
+            <param name="makeServiceBindData">请求注入操作的服务绑定数据</param>
+            <param name="service">希望构建的服务名或者别名</param>
+            <param name="baseParam">当前正在构建的变量</param>
+            <returns>构建结果</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetVariableTag">
+            <summary>
+            获取变量标签
+            </summary>
+            <returns>变量标签</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetBuildStackDebugMessage">
+            <summary>
+            获取编译堆栈调试消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeBuildFaildException(System.String,System.Type,System.Exception)">
+            <summary>
+            生成一个编译失败异常
+            </summary>
+            <param name="makeService">构造的服务名字</param>
+            <param name="makeServiceType">构造的服务类型</param>
+            <param name="innerException">内部异常</param>
+            <returns>运行时异常</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetInnerExceptionMessage(System.Exception)">
+            <summary>
+            获取内部异常提示消息
+            </summary>
+            <param name="innerException">内部异常</param>
+            <returns>提示消息内容</returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeUnresolvableException(System.String,System.Type)">
+            <summary>
+            生成一个未能构建基本类型的异常
+            </summary>
+            <param name="name">变量名</param>
+            <param name="declaringClass">变量所属类</param>
+            <returns>运行时异常</returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeCircularDependencyException(System.String)">
+            <summary>
+            生成一个出现循环依赖的异常
+            </summary>
+            <param name="service">当前服务名</param>
+            <returns>运行时异常</returns>
+        </member>
+        <member name="M:LT.Container.Container.FormatService(System.String)">
+            <summary>
+            格式化服务名
+            </summary>
+            <param name="service">服务名</param>
+            <returns>格式化后的服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.CanInject(System.Type,System.Object)">
+            <summary>
+            检查实例是否实现自某种类型
+            </summary>
+            <param name="type">需要实现自的类型</param>
+            <param name="instance">生成的实例</param>
+            <returns>是否符合类型</returns>
+        </member>
+        <member name="M:LT.Container.Container.GuardUserParamsCount(System.Int32)">
+            <summary>
+            保证用户传入参数必须小于指定值
+            </summary>
+            <param name="count">传入参数数量</param>
+        </member>
+        <member name="M:LT.Container.Container.GuardResolveInstance(System.Object,System.String)">
+            <summary>
+            守卫构建实例状态
+            </summary>
+            <param name="instance">服务实例</param>
+            <param name="makeService">服务名</param>
+        </member>
+        <member name="M:LT.Container.Container.SpeculatedServiceType(System.String)">
+            <summary>
+            根据服务名推测服务的类型
+            </summary>
+            <param name="service">服务名</param>
+            <returns>服务类型</returns>
+        </member>
+        <member name="M:LT.Container.Container.AttributeInject(LT.Container.Bindable,System.Object)">
+            <summary>
+            属性注入
+            </summary>
+            <param name="makeServiceBindData">服务绑定数据</param>
+            <param name="makeServiceInstance">服务实例</param>
+            <returns>服务实例</returns>
+            <exception cref="T:LT.LogicException">属性是必须的或者注入类型和需求类型不一致</exception>
+        </member>
+        <member name="M:LT.Container.Container.CheckCompactInjectUserParams(System.Reflection.ParameterInfo,System.Object[])">
+            <summary>
+            检查是否可以紧缩注入用户传入的参数
+            </summary>
+            <param name="baseParam">服务实例的参数信息</param>
+            <param name="userParams">输入的构造参数列表</param>
+            <returns>是否可以紧缩注入</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetCompactInjectUserParams(System.Reflection.ParameterInfo,System.Object[]@)">
+            <summary>
+            获取通过紧缩注入的参数
+            </summary>
+            <param name="baseParam">服务实例的参数信息</param>
+            <param name="userParams">输入的构造参数列表</param>
+            <returns>紧缩注入的参数</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetParamsMatcher(System.Object[]@)">
+            <summary>
+            获取参数(<see cref="T:LT.Container.IParams"/>)匹配器
+            <para>开发者重写后可以实现自己的匹配器</para>
+            <para>如果调用获取到的匹配器后返回结果为null则表示没有匹配到参数</para>
+            </summary>
+            <param name="userParams">用户传入的参数</param>
+            <returns>匹配器，如果返回null则表示没有匹配器</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetDependencies(LT.Container.Bindable,System.Reflection.ParameterInfo[],System.Object[])">
+            <summary>
+            获取依赖构建结果
+            </summary>
+            <param name="makeServiceBindData">服务绑定数据</param>
+            <param name="baseParams">服务实例的参数信息</param>
+            <param name="userParams">输入的构造参数列表</param>
+            <returns>服务所需参数的构建结果</returns>
+            <exception cref="T:LT.LogicException">生成的实例类型和需求类型不一致</exception>
+        </member>
+        <member name="M:LT.Container.Container.GetConstructorsInjectParams(LT.Container.Bindable,System.Type,System.Object[])">
+            <summary>
+            获取构造函数参数
+            </summary>
+            <param name="makeServiceBindData">服务绑定数据</param>
+            <param name="makeServiceType">服务类型</param>
+            <param name="userParams">用户传入的构造参数</param>
+            <returns>构造函数参数</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetServiceWithInstanceObject(System.Object)">
+            <summary>
+            通过对象反向获取服务名
+            </summary>
+            <param name="instance">对象</param>
+            <returns>服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.GuardConstruct(System.String)">
+            <summary>
+            验证构建状态
+            </summary>
+            <param name="method">函数名</param>
+        </member>
+        <member name="M:LT.Container.Container.GuardServiceName(System.String)">
+            <summary>
+            验证服务名有效性
+            </summary>
+            <param name="service">服务名</param>
+        </member>
+        <member name="M:LT.Container.Container.GuardFlushing">
+            <summary>
+            验证重置状态
+            </summary>
+        </member>
+        <member name="M:LT.Container.Container.AliasToService(System.String)">
+            <summary>
+            获取别名最终对应的服务名
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>最终映射的服务名</returns>
+        </member>
+        <member name="M:LT.Container.Container.TriggerOnResolving(LT.Container.BindData,System.Object)">
+            <summary>
+            触发全局构建事件
+            </summary>
+            <param name="bindData">服务绑定数据</param>
+            <param name="instance">服务实例</param>
+            <returns>被修饰器修饰后的服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.TriggerOnAfterResolving(LT.Container.BindData,System.Object)">
+            <summary>
+            触发全局构建事件之后的回调
+            </summary>
+            <param name="bindData">服务绑定数据</param>
+            <param name="instance">服务实例</param>
+            <returns>被修饰器修饰后的服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.TriggerOnRelease(LT.Container.IBindData,System.Object)">
+            <summary>
+            触发全局释放事件
+            </summary>
+            <param name="bindData">服务绑定数据</param>
+            <param name="instance">服务实例</param>
+            <returns>被修饰器修饰后的服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.Trigger(LT.Container.IBindData,System.Object,System.Collections.Generic.List{System.Action{LT.Container.IBindData,System.Object}})">
+            <summary>
+            触发指定的事件列表
+            </summary>
+            <param name="bindData">服务绑定数据</param>
+            <param name="instance">服务实例</param>
+            <param name="list">事件列表</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.TriggerOnRebound(System.String,System.Object)">
+            <summary>
+            触发服务重定义事件
+            </summary>
+            <param name="service">发生重定义的服务</param>
+            <param name="instance">服务实例（如果为空将会从容器请求）</param>
+        </member>
+        <member name="M:LT.Container.Container.DisposeInstance(System.Object)">
+            <summary>
+            释放实例
+            </summary>
+            <param name="obj">实例</param>
+        </member>
+        <member name="M:LT.Container.Container.Pair(System.Type,System.Object)">
+            <summary>
+            类型配实例配偶
+            </summary>
+            <param name="type">类型</param>
+            <param name="instance">实例</param>
+            <returns>键值对</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetOnReboundCallbacks(System.String)">
+            <summary>
+            获取重定义的服务所对应的回调
+            </summary>
+            <param name="service">服务名</param>
+            <returns>回调列表</returns>
+        </member>
+        <member name="M:LT.Container.Container.HasOnReboundCallbacks(System.String)">
+            <summary>
+            是否拥有重定义的服务所对应的回调
+            </summary>
+            <param name="service">服务名</param>
+            <returns>是否存在回调</returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeEmptyBindData(System.String)">
+            <summary>
+            制作一个空的绑定数据
+            </summary>
+            <param name="service">服务名</param>
+            <returns>空绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.Container.Resolve(System.String,System.Object[])">
+            <summary>
+            构建服务(不会进行GuardConstruct检查)
+            </summary>
+            <param name="service">服务名或别名</param>
+            <param name="userParams">用户传入的构造参数</param>
+            <returns>服务实例，如果构造失败那么返回null</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="service"/>为<c>null</c>或者空字符串</exception>
+            <exception cref="T:LT.LogicException">出现循环依赖</exception>
+            <exception cref="T:LT.Container.UnresolvableException">无法构建服务</exception>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.Extend(System.String,System.Object)">
+            <summary>
+            为服务进行扩展
+            </summary>
+            <param name="service">服务名</param>
+            <param name="instance">服务实例</param>
+            <returns>扩展后的服务</returns>
+        </member>
+        <member name="M:LT.Container.Container.Inject(LT.Container.Bindable,System.Object)">
+            <summary>
+            为对象进行依赖注入
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="instance">对象实例</param>
+            <returns>注入完成的对象</returns>
+        </member>
+        <member name="M:LT.Container.Container.Build(LT.Container.BindData,System.Object[])">
+            <summary>
+            编译服务
+            </summary>
+            <param name="makeServiceBindData">服务绑定数据</param>
+            <param name="userParams">用户传入的构造参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.CreateInstance(LT.Container.Bindable,System.Type,System.Object[])">
+            <summary>
+            构造服务实现（准备需要注入的参数）
+            </summary>
+            <param name="makeServiceBindData">服务绑定数据</param>
+            <param name="makeServiceType">服务类型</param>
+            <param name="userParams">用户传入的构造参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.Container.CreateInstance(System.Type,System.Object[])">
+            <summary>
+            通过指定的类型构建服务实现
+            </summary>
+            <param name="makeServiceType">指定的服务类型</param>
+            <param name="userParams">用户自定义参数</param>
+            <returns>构建的服务实现</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetBindFillable(System.String)">
+            <summary>
+            获取服务绑定数据,如果数据为null则填充数据
+            </summary>
+            <param name="service">服务名</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.Container.GetParamsTypeInUserParams(System.Object[]@)">
+            <summary>
+            从<paramref name="userParams"/>中获取<see cref="T:LT.Container.IParams"/>类型的变量
+            </summary>
+            <param name="userParams">用户传入参数</param>
+            <returns>获取到的参数</returns>
+        </member>
+        <member name="M:LT.Container.Container.MakeParamsMatcher(LT.Container.IParams[])">
+            <summary>
+            生成一个默认的参数<see cref="T:LT.Container.IParams" />匹配器
+            </summary>
+            <param name="tables">参数表</param>
+            <returns>匹配器</returns>
+        </member>
+        <member name="M:LT.Container.Container.AddClosure(System.Action{LT.Container.IBindData,System.Object},System.Collections.Generic.List{System.Action{LT.Container.IBindData,System.Object}})">
+            <summary>
+            增加一个闭包到指定的列表
+            </summary>
+            <param name="closure">闭包</param>
+            <param name="list">指定的列表</param>
+        </member>
+        <member name="T:LT.Container.ExtendBindData">
+            <summary>
+             绑定数据拓展
+             </summary>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.Alias``1(LT.Container.IBindData)">
+            <summary>
+            为服务设定一个别名
+            </summary>
+            <typeparam name="TAlias">别名</typeparam>
+            <param name="bindData">绑定数据</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnResolving(LT.Container.IBindData,System.Action)">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnResolving(LT.Container.IBindData,System.Action{System.Object})">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnResolving``1(LT.Container.IBindData,System.Action{``0})">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <typeparam name="T">指定的类型</typeparam>
+            <param name="bindData">绑定数据</param>
+            <param name="closure">闭包</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnResolving``1(LT.Container.IBindData,System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <typeparam name="T">指定的类型</typeparam>
+            <param name="bindData">绑定数据</param>
+            <param name="closure">闭包</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnAfterResolving(LT.Container.IBindData,System.Action)">
+            <summary>
+            解决服务事件之后的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnAfterResolving(LT.Container.IBindData,System.Action{System.Object})">
+            <summary>
+            解决服务事件之后的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnAfterResolving``1(LT.Container.IBindData,System.Action{``0})">
+            <summary>
+            解决服务事件之后的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnAfterResolving``1(LT.Container.IBindData,System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            解决服务事件之后的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnRelease(LT.Container.IBindData,System.Action)">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">处理事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnRelease(LT.Container.IBindData,System.Action{System.Object})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">处理事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnRelease``1(LT.Container.IBindData,System.Action{``0})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="closure">处理事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendBindData.OnRelease``1(LT.Container.IBindData,System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="closure">处理事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="T:LT.Container.ExtendContainer">
+            <summary>
+             容器拓展
+             </summary>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.GetBind``1(LT.Container.IContainer)">
+            <summary>
+            获取服务的绑定数据,如果绑定不存在则返回null
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务绑定数据或者null</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.HasBind``1(LT.Container.IContainer)">
+            <summary>
+            是否已经绑定了服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>代表服务是否被绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.HasInstance``1(LT.Container.IContainer)">
+            <summary>
+            是否已经实例静态化
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>是否已经静态化</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.IsResolved``1(LT.Container.IContainer)">
+            <summary>
+            服务是否已经被解决过
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>是否已经被解决过</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.CanMake``1(LT.Container.IContainer)">
+            <summary>
+            是否可以生成服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务是否可以被构建</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.IsStatic``1(LT.Container.IContainer)">
+            <summary>
+            服务是否是静态化的,如果服务不存在也将返回false
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务是否是静态化的</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.IsAlias``1(LT.Container.IContainer)">
+            <summary>
+            是否是别名
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <returns>是否是别名</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Alias``2(LT.Container.IContainer)">
+            <summary>
+            为服务设定一个别名
+            </summary>
+            <typeparam name="TAlias">别名</typeparam>
+            <typeparam name="TService">服务名</typeparam>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Bind``1(LT.Container.IContainer)">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Bind``2(LT.Container.IContainer)">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Bind``1(LT.Container.IContainer,System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Bind``1(LT.Container.IContainer,System.Func{System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Bind``1(LT.Container.IContainer,System.Func{System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Bind(LT.Container.IContainer,System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.BindIf``2(LT.Container.IContainer,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.BindIf``1(LT.Container.IContainer,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.BindIf``1(LT.Container.IContainer,System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.BindIf``1(LT.Container.IContainer,System.Func{System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.BindIf``1(LT.Container.IContainer,System.Func{System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.BindIf(LT.Container.IContainer,System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Singleton(LT.Container.IContainer,System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Singleton``2(LT.Container.IContainer)">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Singleton``1(LT.Container.IContainer)">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Singleton``1(LT.Container.IContainer,System.Func{LT.Container.IContainer,System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Singleton``1(LT.Container.IContainer,System.Func{System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Singleton``1(LT.Container.IContainer,System.Func{System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.SingletonIf``2(LT.Container.IContainer,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <typeparam name="TConcrete">服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.SingletonIf``1(LT.Container.IContainer,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名，同时也是服务实现</typeparam>
+            <param name="container">服务容器</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.SingletonIf``1(LT.Container.IContainer,System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.SingletonIf``1(LT.Container.IContainer,System.Func{System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.SingletonIf``1(LT.Container.IContainer,System.Func{System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.SingletonIf(LT.Container.IContainer,System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Unbind``1(LT.Container.IContainer)">
+            <summary>
+            解除服务绑定
+            </summary>
+            <typeparam name="TService">解除绑定的服务</typeparam>
+            <param name="container">服务容器</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Tag``1(LT.Container.IContainer,System.String)">
+            <summary>
+            为一个服务定义一个标记
+            </summary>
+            <typeparam name="TService">服务</typeparam>
+            <param name="container">服务容器</param>
+            <param name="tag">标记名</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Instance``1(LT.Container.IContainer,System.Object)">
+            <summary>
+            静态化一个服务,实例值会经过解决修饰器
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="instance">实例值</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Release``1(LT.Container.IContainer)">
+            <summary>
+            释放服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Release(LT.Container.IContainer,System.Object[]@,System.Boolean)">
+            <summary>
+            根据实例对象释放静态化实例
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="instances">需要释放静态化实例对象</param>
+            <param name="reverse">以相反的顺序开始释放</param>
+            <returns>只要有一个没有释放成功那么返回false, <paramref name="instances"/>为没有释放掉的实例</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Make``1(LT.Container.IContainer,System.Object[])">
+            <summary>
+            构造一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="userParams">用户提供的参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Make(LT.Container.IContainer,System.Type,System.Object[])">
+            <summary>
+            构造一个服务
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="type">服务类型</param>
+            <param name="userParams">用户提供的参数</param>
+            <returns>服务实例</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Factory``1(LT.Container.IContainer,System.Object[])">
+            <summary>
+            获取一个回调，当执行回调可以生成指定的服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="userParams">用户传入的参数</param>
+            <returns>回调方案</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Extend(LT.Container.IContainer,System.String,System.Func{System.Object,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="service">服务名</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Extend``2(LT.Container.IContainer,System.Func{``1,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Extend``2(LT.Container.IContainer,System.Func{``1,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Extend``1(LT.Container.IContainer,System.Func{``0,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>如果构建的实例符合指定的类型或者接口，那么触发扩展闭包</para>
+            </summary>
+            <typeparam name="TConcrete">实现的类型或接口</typeparam>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Extend``1(LT.Container.IContainer,System.Func{``0,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>如果构建的实例符合指定的类型或者接口，那么触发扩展闭包</para>
+            </summary>
+            <typeparam name="TConcrete">实现的类型或接口</typeparam>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnRelease(LT.Container.IContainer,System.Action{System.Object})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="callback">处理释放时的回调</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnRelease``1(LT.Container.IContainer,System.Action{``0})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="closure">处理释放时的回调</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnRelease``1(LT.Container.IContainer,System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="closure">处理释放时的回调</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnResolving(LT.Container.IContainer,System.Action{System.Object})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="callback">回调函数</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnResolving``1(LT.Container.IContainer,System.Action{``0})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            <para>只有类型和给定的类型相匹配才会被回调</para>
+            </summary>
+            <typeparam name="T">指定的类型</typeparam>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnResolving``1(LT.Container.IContainer,System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            <para>只有类型和给定的类型相匹配才会被回调</para>
+            </summary>
+            <typeparam name="T">指定的类型</typeparam>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnAfterResolving(LT.Container.IContainer,System.Action{System.Object})">
+            <summary>
+            当服务被解决事件之后的回调
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="callback">回调函数</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnAfterResolving``1(LT.Container.IContainer,System.Action{``0})">
+            <summary>
+            当服务被解决事件之后的回调
+            <para>只有类型和给定的类型相匹配才会被回调</para>
+            </summary>
+            <typeparam name="T">指定的类型</typeparam>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.OnAfterResolving``1(LT.Container.IContainer,System.Action{LT.Container.IBindData,``0})">
+            <summary>
+            当服务被解决事件之后的回调
+            <para>只有类型和给定的类型相匹配才会被回调</para>
+            </summary>
+            <typeparam name="T">指定的类型</typeparam>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Watch``1(LT.Container.IContainer,System.Action)">
+            <summary>
+            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
+            <param>调用是以依赖注入的形式进行的</param>
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="method">回调</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Watch``1(LT.Container.IContainer,System.Action{``0})">
+            <summary>
+            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
+            <param>调用是以依赖注入的形式进行的</param>
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="method">回调</param>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Type2Service``1(LT.Container.IContainer)">
+            <summary>
+            类型转为服务名
+            </summary>
+            <typeparam name="TService">服务类型</typeparam>
+            <param name="container">服务容器</param>
+            <returns>服务名</returns>
+        </member>
+        <member name="M:LT.Container.ExtendContainer.Factory(LT.Container.IContainer,System.String,System.Object[])">
+            <summary>
+            获取一个回调，当执行回调可以生成指定的服务
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="service">服务名或别名</param>
+            <param name="userParams">用户传入的参数</param>
+            <returns>回调方案</returns>
+        </member>
+        <member name="T:LT.Container.GivenData`1">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.GivenData`1.#ctor(LT.Container.Container,LT.Container.Bindable{`0})">
+            <summary>
+            构建 <see cref="T:LT.Container.GivenData`1"/> 实例.
+            </summary>
+            <param name="container">容器实例</param>
+            <param name="bindable">绑定的数据</param>
+        </member>
+        <member name="M:LT.Container.GivenData`1.Given(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.GivenData`1.Given``1">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.GivenData`1.Given(System.Func{System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.GivenData`1.Needs(System.String)">
+            <inheritdoc cref="M:LT.Container.Bindable`1.Needs(System.String)"/>
+        </member>
+        <member name="T:LT.Container.IBindable">
+            <summary>
+            被绑定对象
+            </summary>
+        </member>
+        <member name="P:LT.Container.IBindable.Service">
+            <summary>
+            当前绑定的名字
+            </summary>
+        </member>
+        <member name="P:LT.Container.IBindable.Container">
+            <summary>
+            所属服务容器
+            </summary>
+        </member>
+        <member name="M:LT.Container.IBindable.Unbind">
+            <summary>
+            移除绑定
+            <para>如果进行的是服务绑定 , 那么在解除绑定时静态化的物体将会触发释放</para>
+            </summary>
+        </member>
+        <member name="T:LT.Container.IBindable`1">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.Container.IBindable`1.Needs(System.String)">
+            <summary>
+            指定所需的服务
+            </summary>
+            <param name="service">所需的服务名</param>
+            <returns>给予所需服务的数据</returns>
+        </member>
+        <member name="M:LT.Container.IBindable`1.Needs``1">
+            <inheritdoc cref="M:LT.Container.IBindable`1.Needs(System.String)"/>
+            <typeparam name="TService">所需的服务类型</typeparam>
+        </member>
+        <member name="T:LT.Container.IBindData">
+            <summary>
+            服务绑定数据
+            </summary>
+        </member>
+        <member name="P:LT.Container.IBindData.Concrete">
+            <summary>
+            服务实现
+            </summary>
+        </member>
+        <member name="P:LT.Container.IBindData.IsStatic">
+            <summary>
+            是否是静态服务
+            </summary>
+        </member>
+        <member name="M:LT.Container.IBindData.Alias(System.String)">
+            <summary>
+            为服务设定一个别名
+            </summary>
+            <param name="alias">别名</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IBindData.Tag(System.String)">
+            <summary>
+            为服务打上一个标签
+            </summary>
+            <param name="tag">标签名</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IBindData.OnResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IBindData.OnAfterResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            解决服务时事件之后的回调
+            </summary>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IBindData.OnRelease(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当服务被释放时
+            </summary>
+            <param name="closure">处理事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="T:LT.Container.IContainer">
+            <summary>
+            <see cref ="T:LT.Container.IContainer"/>是所有IOC Container类实现的接口。
+            </summary>
+        </member>
+        <member name="P:LT.Container.IContainer.Item(System.String)">
+            <summary>
+            从容器中解析指定的类型。
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>服务实例。 如果服务无法解决，则抛出异常</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.GetBind(System.String)">
+            <summary>
+            获取服务的绑定数据,如果绑定不存在则返回null
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>服务绑定数据或者null</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.HasBind(System.String)">
+            <summary>
+            是否已经绑定了服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>返回一个bool值代表服务是否被绑定</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.HasInstance(System.String)">
+            <summary>
+            是否已经实例静态化
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>是否已经静态化</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.IsResolved(System.String)">
+            <summary>
+            服务是否已经被解决过
+            </summary>
+            <param name="service">服务名或别名</param>
+            <returns>是否已经被解决过</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.CanMake(System.String)">
+            <summary>
+            是否可以生成服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>是否可以生成服务</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.IsStatic(System.String)">
+            <summary>
+            服务是否是静态化的,如果服务不存在也将返回false
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <returns>是否是静态化的</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.IsAlias(System.String)">
+            <summary>
+            是否是别名
+            </summary>
+            <param name="name">名字</param>
+            <returns>是否是别名</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Bind(System.String,System.Type,System.Boolean)">
+            <summary>
+            绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否静态化</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Bind(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean)">
+            <summary>
+            绑定一个服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实体</param>
+            <param name="isStatic">服务是否静态化</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.BindIf(System.String,System.Func{LT.Container.IContainer,System.Object[],System.Object},System.Boolean,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否是静态的</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否成功绑定</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.BindIf(System.String,System.Type,System.Boolean,LT.Container.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <param name="service">服务名</param>
+            <param name="concrete">服务实现</param>
+            <param name="isStatic">服务是否是静态的</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否成功绑定</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Unbind(System.String)">
+            <summary>
+            解除绑定服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+        </member>
+        <member name="M:LT.Container.IContainer.Tag(System.String,System.String[])">
+            <summary>
+            为一个及以上的服务定义一个标记
+            </summary>
+            <param name="tag">标记名</param>
+            <param name="service">服务名</param>
+        </member>
+        <member name="M:LT.Container.IContainer.Tagged(System.String)">
+            <summary>
+            根据标记名生成标记所对应的所有服务实例
+            </summary>
+            <param name="tag">标记名</param>
+            <returns>将会返回标记所对应的所有服务实例</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Instance(System.String,System.Object)">
+            <summary>
+            静态化一个服务
+            </summary>
+            <param name="service">服务名或者别名</param>
+            <param name="instance">服务实例</param>
+        </member>
+        <member name="M:LT.Container.IContainer.Release(System.Object)">
+            <summary>
+            释放静态化实例
+            </summary>
+            <param name="mixed">服务名或别名或单例化的对象</param>
+            <returns>是否完成了释放</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Flush">
+            <summary>
+            清空容器的所有实例，绑定，别名，标签，解决器，方法容器
+            </summary>
+        </member>
+        <member name="M:LT.Container.IContainer.Make(System.String,System.Object[])">
+            <summary>
+            构造服务
+            </summary>
+            <param name="service">服务名或别名</param>
+            <param name="userParams">用户传入的参数</param>
+            <returns>服务实例，如果构造失败那么返回null</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Alias(System.String,System.String)">
+            <summary>
+            以全局的方式为服务设定一个别名
+            </summary>
+            <param name="alias">别名</param>
+            <param name="service">映射到的服务名</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Extend(System.String,System.Func{System.Object,LT.Container.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="service">服务名或别名,如果为null则意味着全局有效</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:LT.Container.IContainer.OnResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当服务被解决时，生成的服务会经过注册的回调函数
+            </summary>
+            <param name="closure">回调函数</param>
+            <returns>当前容器对象</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.OnAfterResolving(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            解决服务时事件之后的回调
+            </summary>
+            <param name="closure">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.OnRelease(System.Action{LT.Container.IBindData,System.Object})">
+            <summary>
+            当静态服务被释放时
+            </summary>
+            <param name="action">处理释放时的回调</param>
+        </member>
+        <member name="M:LT.Container.IContainer.OnFindType(System.Func{System.String,System.Type},System.Int32)">
+            <summary>
+            当查找类型无法找到时会尝试去调用开发者提供的查找类型函数
+            </summary>
+            <param name="func">查找类型的回调</param>
+            <param name="priority">查询优先级(值越小越优先)</param>
+            <returns>当前容器实例</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.OnRebound(System.String,System.Action{System.Object})">
+            <summary>
+            当一个已经被解决的服务，发生重绑定时触发
+            </summary>
+            <param name="service">服务名</param>
+            <param name="callback">回调</param>
+            <returns>服务容器</returns>
+        </member>
+        <member name="M:LT.Container.IContainer.Type2Service(System.Type)">
+            <summary>
+            类型转为服务名
+            </summary>
+            <param name="type">类型</param>
+            <returns>转换后的服务名</returns>
+        </member>
+        <member name="T:LT.Container.IGivenData`1">
+            <summary>
+            给予服务所需的数据
+            </summary>
+            <typeparam name="TReturn">IBindable的具体类型</typeparam>
+        </member>
+        <member name="M:LT.Container.IGivenData`1.Given(System.String)">
+            <summary>
+            获取服务所需的数据。
+            </summary>
+            <param name="service">服务名或服务别名。</param>
+            <returns>返回IBindData实例</returns>
+        </member>
+        <member name="M:LT.Container.IGivenData`1.Given``1">
+            <inheritdoc cref="M:LT.Container.IGivenData`1.Given(System.String)"/>
+        </member>
+        <member name="M:LT.Container.IGivenData`1.Given(System.Func{System.Object})">
+            <inheritdoc cref="M:LT.Container.IGivenData`1.Given(System.String)"/>
+            <param name="closure">闭包方法返回的服务所需的数据</param>
+        </member>
+        <member name="T:LT.Container.InjectAttribute">
+            <summary>
+            注入标记
+            </summary>
+        </member>
+        <member name="T:LT.Container.IParams">
+            <summary>
+            所有参数表都必须实现此接口。
+            </summary>
+        </member>
+        <member name="M:LT.Container.IParams.TryGetValue(System.String,System.Object@)">
+            <summary>
+            获取一个参数
+            </summary>
+            <param name="key">参数名</param>
+            <param name="value">参数值</param>
+            <returns>是否成功获取</returns>
+        </member>
+        <member name="T:LT.Container.ParamsCollection">
+            <summary>
+            默认参数表实现。
+            </summary>
+        </member>
+        <member name="F:LT.Container.ParamsCollection.table">
+            <summary>
+            参数表
+            </summary>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            迭代器
+            </summary>
+            <returns>迭代器</returns>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#String,System#Object}}#GetEnumerator">
+            <summary>
+            迭代器
+            </summary>
+            <returns>迭代器</returns>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.#ctor">
+            <summary>
+            参数名注入表
+            </summary>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            参数名注入表
+            </summary>
+            <param name="args">参数表</param>
+        </member>
+        <member name="P:LT.Container.ParamsCollection.Item(System.String)">
+            <summary>
+            获取或者设定一个参数
+            </summary>
+            <param name="key">参数名</param>
+            <returns>参数值</returns>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.Add(System.String,System.Object)">
+            <summary>
+            增加一个参数
+            </summary>
+            <param name="key">参数名</param>
+            <param name="value">参数值</param>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.Remove(System.String)">
+            <summary>
+            移除参数
+            </summary>
+            <param name="key">参数名</param>
+            <returns></returns>
+        </member>
+        <member name="M:LT.Container.ParamsCollection.TryGetValue(System.String,System.Object@)">
+            <summary>
+            获取一个参数
+            </summary>
+            <param name="key">参数名</param>
+            <param name="value">参数值</param>
+            <returns>是否成功获取</returns>
+        </member>
+        <member name="T:LT.Container.UnresolvableException">
+            <summary>
+            未能解决异常,提供给Container模块使用
+            </summary>
+        </member>
+        <member name="M:LT.Container.UnresolvableException.#ctor">
+            <summary>
+            未能解决异常
+            </summary>
+        </member>
+        <member name="M:LT.Container.UnresolvableException.#ctor(System.String)">
+            <summary>
+            未能解决异常
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:LT.Container.UnresolvableException.#ctor(System.String,System.Exception)">
+            <summary>
+            未能解决异常
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="T:LT.EventDispatcher.EventDispatcher">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.EventDispatcher.EventDispatcher.#ctor(System.Boolean)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="inheritancePropagation">是否基于继承链触发事件</param>
+        </member>
+        <member name="M:LT.EventDispatcher.EventDispatcher.AddListener``1(System.Action{``0},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.EventDispatcher.EventDispatcher.Dispatch``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.EventDispatcher.EventDispatcher.GetListeners``1">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.EventDispatcher.EventDispatcher.HasListeners``1">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.EventDispatcher.EventDispatcher.RemoveListener``1(System.Action{``0})">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.EventDispatcher.IEventDispatcher">
+            <summary>
+            事件调度器接口
+            </summary>
+        </member>
+        <member name="M:LT.EventDispatcher.IEventDispatcher.AddListener``1(System.Action{``0},System.Int32)">
+            <summary>
+            添加事件监听器
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <param name="listener">监听器</param>
+            <param name="priority">优先级。值越小事件越早</param>
+        </member>
+        <member name="M:LT.EventDispatcher.IEventDispatcher.RemoveListener``1(System.Action{``0})">
+            <summary>
+            移除事件监听器
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <param name="listener">删除指定的侦听器，否则删除该事件下的所有侦听器。</param>
+        </member>
+        <member name="M:LT.EventDispatcher.IEventDispatcher.GetListeners``1">
+            <summary>
+            获取指定事件的侦听器或按降序优先级排序的所有侦听器。 不会在继承链中返回侦听器。
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <returns>指定事件的事件监听器</returns>
+        </member>
+        <member name="M:LT.EventDispatcher.IEventDispatcher.HasListeners``1">
+            <summary>
+            是否存在指定事件的监听器
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <returns>如果存在则返回True</returns>
+        </member>
+        <member name="M:LT.EventDispatcher.IEventDispatcher.Dispatch``1(``0)">
+            <summary>
+            发送事件
+            </summary>
+            <typeparam name="T">事件类型</typeparam>
+            <param name="eventArgs">需要被处理的事件对象</param>
+            <returns>返回已发送通过的事件</returns>
+        </member>
+        <member name="T:LT.EventDispatcher.IStoppableEvent">
+            <summary>
+            可能中断处理的事件。
+            </summary>
+        </member>
+        <member name="M:LT.EventDispatcher.IStoppableEvent.IsPropagationStopped">
+            <summary>
+            传播是否中断
+            </summary>
+            <returns>中断则返回True</returns>
+        </member>
+        <member name="T:LT.AssertException">
+            <summary>
+            表示断言异常。
+            </summary>
+        </member>
+        <member name="M:LT.AssertException.#ctor">
+            <summary>
+            断言异常
+            </summary>
+        </member>
+        <member name="M:LT.AssertException.#ctor(System.String)">
+            <summary>
+            断言异常
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:LT.AssertException.#ctor(System.String,System.Exception)">
+            <summary>
+            断言异常
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="T:LT.LogicException">
+            <summary>
+            代码逻辑异常
+            </summary>
+        </member>
+        <member name="M:LT.LogicException.#ctor">
+            <summary>
+            代码逻辑异常
+            </summary>
+        </member>
+        <member name="M:LT.LogicException.#ctor(System.String)">
+            <summary>
+            代码逻辑异常
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:LT.LogicException.#ctor(System.String,System.Exception)">
+            <summary>
+            代码逻辑异常
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="T:LT.RuntimeException">
+            <summary>
+            运行时异常
+            </summary>
+        </member>
+        <member name="M:LT.RuntimeException.#ctor">
+            <summary>
+            运行时异常
+            </summary>
+        </member>
+        <member name="M:LT.RuntimeException.#ctor(System.String)">
+            <summary>
+            运行时异常
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:LT.RuntimeException.#ctor(System.String,System.Exception)">
+            <summary>
+            运行时异常
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="T:LT.Arr">
+            <summary>
+            数组
+            </summary>
+        </member>
+        <member name="M:LT.Arr.Merge``1(``0[][])">
+            <summary>
+            将多个规定数组合并成一个数组
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="sources">规定数组</param>
+            <returns>合并后的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Rand``1(``0[],System.Int32)">
+            <summary>
+            从规定数组中获取一个或者指定数量的随机值
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="number">随机的数量</param>
+            <returns>随机后的元素</returns>
+        </member>
+        <member name="M:LT.Arr.Shuffle``1(``0[],System.Nullable{System.Int32})">
+            <summary>
+            将规定数组中的元素打乱
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="seed">种子</param>
+            <returns>打乱后的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Splice``1(``0[]@,System.Int32,System.Nullable{System.Int32},``0[])">
+            <summary>
+            从数组中移除指定长度的元素，如果给定了<paramref name="replSource"/>参数，那么新元素从<paramref name="start"/>位置开始插入
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="start">
+            删除元素的开始位置。
+            <para>如果该值设置为正数，则从前往后开始删除</para>
+            <para>如果该值设置为负数，则从后向前取 <paramref name="start"/> 绝对值。-2 意味着从数组的倒数第二个元素开始</para></param>
+            <param name="length">
+            删除元素的个数，也是被返回数组的长度
+            <para>如果该值设置为整数，则返回该数量的元素。</para>
+            <para>如果该值设置为负数，则则从后向前取 <paramref name="length"/> 绝对值位置终止删除。-1 意味着从数组的倒数第一个元素前删除</para>
+            <para>如果该值未设置，则返回从 <paramref name="start"/> 参数设置的位置开始直到数组末端的所有元素。</para>
+            </param>
+            <param name="replSource">在start位置插入的数组</param>
+            <returns>被删除的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Cut``1(``0[]@,System.Int32)">
+            <summary>
+            修剪数组
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">源数组</param>
+            <param name="count">裁剪范围，负数为从后向前修剪</param>
+        </member>
+        <member name="M:LT.Arr.Chunk``1(``0[],System.Int32)">
+            <summary>
+            将数组分为新的数组块
+            <para>其中每个数组的单元数目由 <paramref name="size"/> 参数决定。最后一个数组的单元数目可能会少几个。</para>
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="size">每个分块的大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:LT.Arr.Fill``1(System.Int32,System.Int32,``0,``0[])">
+            <summary>
+            对数组进行填充，如果传入了规定数组，那么会在规定数组的基础上进行填充
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="start">起始下标</param>
+            <param name="length">填充长度</param>
+            <param name="value">填充的值</param>
+            <param name="source">规定数组</param>
+            <returns>填充后的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Remove``1(``0[]@,System.Predicate{``0})">
+            <summary>
+            将数组每个值传给回调函数，如果回调函数返回 true，则移除数组中对应的元素，并返回被移除的元素
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="predicate">回调函数</param>
+            <returns>被移除的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Filter``1(``0[],System.Predicate{``0})">
+            <summary>
+            输入数组中的每个值传给回调函数,如果回调函数返回 true，则把输入数组中的当前值加入结果数组中
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="predicate">回调函数</param>
+            <returns>需求数组</returns>
+        </member>
+        <member name="M:LT.Arr.Map``2(``0[],System.Func{``0,``1})">
+            <summary>
+            将数组值传入用户自定义函数，自定义函数返回的值作为新的数组值
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <typeparam name="TReturn">返回值类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="callback">自定义函数</param>
+            <returns>处理后的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Map``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            将迭代器的值传入用户自定义函数，自定义函数返回的值作为新的数组值
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <typeparam name="TReturn">返回值类型</typeparam>
+            <param name="source">规定迭代器</param>
+            <param name="callback">自定义函数</param>
+            <returns>处理后的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Pop``1(``0[]@)">
+            <summary>
+            删除数组中的最后一个元素，并将删除的元素作为返回值返回
+            </summary>
+            <typeparam name="T">删除数组中的最后一个元素</typeparam>
+            <param name="source">规定数组</param>
+            <returns>被删除的元素</returns>
+        </member>
+        <member name="M:LT.Arr.Push``1(``0[]@,``0[])">
+            <summary>
+            将一个或多个元素加入数组尾端
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="elements">要加入的元素</param>
+            <returns>数组的元素个数</returns>
+        </member>
+        <member name="M:LT.Arr.Reduce``1(``0[],System.Func{System.Object,``0,System.String},System.Object)">
+            <summary>
+            向用户自定义函数发送数组中的值，并返回一个字符串
+            <para>如果数组是空的且未传递<paramref name="initial"/>参数，该函数返回 null</para>
+            <para>如果指定了<paramref name="initial"/>参数，则该参数将被当成是数组中的第一个值来处理，如果数组为空的话就作为最终返回值(string)</para>
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="callback">自定义函数</param>
+            <param name="initial">初始值</param>
+            <returns></returns>
+        </member>
+        <member name="M:LT.Arr.Slice``1(``0[],System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            在数组中根据条件取出一段值，并返回。
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="start">
+            取出元素的开始位置。
+            <para>如果该值设置为正数，则从前往后开始取</para>
+            <para>如果该值设置为负数，则从后向前取 <paramref name="start"/> 绝对值。-2 意味着从数组的倒数第二个元素开始</para>
+            </param>
+            <param name="length">
+            被返回数组的长度
+            <para>如果该值设置为整数，则返回该数量的元素。</para>
+            <para>如果该值设置为负数，则则从后向前取 <paramref name="length"/> 绝对值位置终止取出。-1 意味着从数组的倒数第一个元素前终止</para>
+            <para>如果该值未设置，则返回从 <paramref name="start"/> 参数设置的位置开始直到数组末端的所有元素。</para>
+            </param>
+            <returns>取出的数组</returns>
+        </member>
+        <member name="M:LT.Arr.Shift``1(``0[]@)">
+            <summary>
+            删除数组中第一个元素，并返回被删除元素的值
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <returns>被删除元素的值</returns>
+        </member>
+        <member name="M:LT.Arr.Unshift``1(``0[]@,``0[])">
+            <summary>
+            向数组插入新元素。新数组的值将被插入到数组的开头。
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="elements">插入的元素</param>
+            <returns>数组元素个数</returns>
+        </member>
+        <member name="M:LT.Arr.Reverse``1(``0[],System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            以相反的顺序返回数组
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="start">
+            起始元素的开始位置。
+            <para>如果该值设置为正数，则从前往后开始取</para>
+            <para>如果该值设置为负数，则从后向前取 <paramref name="start"/> 绝对值。-2 意味着从数组的倒数第二个元素开始</para></param>
+            <param name="length">
+            被返回数组的长度
+            <para>如果该值设置为整数，则返回该数量的元素。</para>
+            <para>如果该值设置为负数，则则从后向前取 <paramref name="length"/> 绝对值位置终止取出。-1 意味着从数组的倒数第一个元素前终止</para>
+            <para>如果该值未设置，则返回从 <paramref name="start"/> 参数设置的位置开始直到数组末端的所有元素。</para>
+            </param>
+            <returns>反转的数组</returns>
+        </member>
+        <member name="M:LT.Arr.IndexOf``1(``0[],``0[])">
+            <summary>
+            从数组中检索指定的值并返回所在的下标，如果返回-1则代表没有出现
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="match">要匹配的值，如果有多个，只有全部的匹配才算匹配</param>
+            <returns>如果要检索的值没有出现，则该方法返回 -1</returns>
+        </member>
+        <member name="M:LT.Arr.Difference``1(``0[],``0[])">
+            <summary>
+            排除掉数组中的指定值
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">需要过滤的数组</param>
+            <param name="match">数组需要排除掉的值</param>
+            <returns>过滤后的数组</returns>
+        </member>
+        <member name="M:LT.Arr.RemoveAt``1(``0[]@,System.Int32)">
+            <summary>
+            移除并返回指定下标的数组元素
+            <para>如果下标传入的是负数那么将会从末尾移除</para>
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="index">数组下标</param>
+            <returns>被移除的元素</returns>
+        </member>
+        <member name="M:LT.Arr.Flash``1(``0[],System.Action{``0},System.Action{``0},System.Action)">
+            <summary>
+            临时性的回调元素，如果遇到异常或者完成回调后会进行回滚元素回调
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="source">规定数组</param>
+            <param name="process">顺序回调</param>
+            <param name="completed">所有回调完成后</param>
+            <param name="rollback">回滚回调</param>
+        </member>
+        <member name="T:LT.Dict">
+            <summary>
+            字典
+            </summary>
+        </member>
+        <member name="M:LT.Dict.Filter``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,``1,System.Boolean})">
+            <summary>
+            将输入字典中的每个值传给回调函数,如果回调函数返回 true，则把输入字典中的当前键值对加入结果字典中
+            </summary>
+            <typeparam name="TKey">字典键类型</typeparam>
+            <typeparam name="TValue">字典值类型</typeparam>
+            <param name="source">规定字典</param>
+            <param name="predicate">回调函数</param>
+            <returns>需求字典</returns>
+        </member>
+        <member name="M:LT.Dict.Remove``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,``1,System.Boolean})">
+            <summary>
+            将输入字典中的每个值传给回调函数，如果回调函数返回 true，则移除字典中对应的元素，并返回被移除的元素
+            </summary>
+            <typeparam name="TKey">字典键类型</typeparam>
+            <typeparam name="TValue">字典值类型</typeparam>
+            <param name="source">规定字典</param>
+            <param name="predicate">回调函数</param>
+            <return>被移除的元素</return>
+        </member>
+        <member name="M:LT.Dict.Modify``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,``1,``1})">
+            <summary>
+            将输入字典中的每个值传给回调函数，回调函数的返回值用于修改元素的值
+            </summary>
+            <typeparam name="TKey">字典键类型</typeparam>
+            <typeparam name="TValue">字典值类型</typeparam>
+            <param name="source">规定字典</param>
+            <param name="callback">回调函数</param>
+        </member>
+        <member name="M:LT.Dict.AddRange``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1},System.Boolean)">
+            <summary>
+            将元素批量添加到字典
+            </summary>
+            <typeparam name="TKey">字典键</typeparam>
+            <typeparam name="TValue">字典值</typeparam>
+            <param name="source">目标字典</param>
+            <param name="added">增加的内容</param>
+            <param name="replaced">遇到重复是否替换，如果不进行替换遇到重复将会抛出一个异常</param>
+        </member>
+        <member name="M:LT.Dict.Map``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,``1,``1})">
+            <summary>
+            将字典值传入用户自定义函数，自定义函数返回的值作为新的字典值
+            </summary>
+            <typeparam name="TKey">字典键类型</typeparam>
+            <typeparam name="TValue">字典值类型</typeparam>
+            <param name="source">规定字典</param>
+            <param name="callback">自定义函数</param>
+            <returns>处理后的字典</returns>
+        </member>
+        <member name="M:LT.Dict.Keys``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            获取字典的键数组
+            </summary>
+            <typeparam name="TKey">字典键类型</typeparam>
+            <typeparam name="TValue">字典值类型</typeparam>
+            <param name="source">规定字典</param>
+            <returns>字典的键数组</returns>
+        </member>
+        <member name="M:LT.Dict.Values``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            获取字典的值数组
+            </summary>
+            <typeparam name="TKey">字典键类型</typeparam>
+            <typeparam name="TValue">字典值类型</typeparam>
+            <param name="source">规定字典</param>
+            <returns>字典的值数组</returns>
+        </member>
+        <member name="M:LT.Dict.Get(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Object)">
+            <summary>
+            使用点（.）来访问深度字典
+            </summary>
+            <param name="dict">规定字典</param>
+            <param name="key">键，支持使用点（.）来进行深度访问</param>
+            <param name="def">默认值</param>
+            <returns>字典值</returns>
+        </member>
+        <member name="M:LT.Dict.Set(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Object)">
+            <summary>
+            使用点（.）来访问深度字典，并为其指定位置设定一个值
+            </summary>
+            <param name="dict">规定字典</param>
+            <param name="key">键，支持使用点（.）来进行深度访问</param>
+            <param name="val">设定的值</param>
+        </member>
+        <member name="M:LT.Dict.Remove(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            使用点（.）来访问深度字典，并移除其中指定的值
+            </summary>
+            <param name="dict">规定字典</param>
+            <param name="key">键，支持使用点（.）来进行深度访问</param>
+        </member>
+        <member name="M:LT.Dict.GetValueByDepthArray(System.Collections.Generic.IDictionary{System.String,System.Object},System.String[]@)">
+            <summary>
+            通过深度数组来访问字典
+            </summary>
+            <param name="dict">规定字典</param>
+            <param name="keys">深度数组（深度数组以倒序传入）</param>
+            <returns>字典值</returns>
+        </member>
+        <member name="M:LT.Dict.SetValueByDepthArray(System.Collections.Generic.IDictionary{System.String,System.Object},System.String[]@,System.Object)">
+            <summary>
+            通过深度数组来访问字典，并为其指定位置设定一个值
+            </summary>
+            <param name="dict">规定字典</param>
+            <param name="keys">深度数组（深度数组以倒序传入）</param>
+            <param name="value">设定值</param>
+        </member>
+        <member name="M:LT.Dict.RemoveValueByDepthArray(System.Collections.Generic.IDictionary{System.String,System.Object},System.String[]@)">
+            <summary>
+            通过深度数组来移除数组中的一个值
+            </summary>
+            <param name="dict">规定字典</param>
+            <param name="keys">深度数组（深度数组以倒序传入）</param>
+        </member>
+        <member name="T:LT.Guard">
+            <summary>
+            代码守护
+            </summary>
+        </member>
+        <member name="P:LT.Guard.That">
+            <summary>
+            获取Guard的单例实例。
+            </summary>
+            <remarks>可以使用它通过csharp扩展方法扩展自定义断言</remarks>
+        </member>
+        <member name="M:LT.Guard.Verify``1(System.Boolean,System.String,System.Exception,System.Object)">
+            <summary>
+            验证条件并在给定条件为True时抛出异常。
+            </summary>
+            <typeparam name="TException">验证失败时触发异常。</typeparam>
+            <param name="condition">条件</param>
+            <param name="message">解释异常的原因</param>
+            <param name="innerException">导致当前异常或空引用的异常</param>
+            <param name="state"></param>
+        </member>
+        <member name="M:LT.Guard.Requires``1(System.Boolean,System.String,System.Exception,System.Object)">
+            <summary>
+            验证条件并在给定条件为False时抛出异常。
+            </summary>
+            <typeparam name="TException">验证失败时触发异常。</typeparam>
+            <param name="condition">条件</param>
+            <param name="message">解释异常的原因</param>
+            <param name="innerException">导致当前异常或空引用的异常</param>
+            <param name="state"></param>
+        </member>
+        <member name="M:LT.Guard.Requires(System.Type,System.Boolean,System.String,System.Exception,System.Object)">
+            <summary>
+            验证条件并在给定条件失败时抛出异常。
+            </summary>
+            <param name="exception">验证失败时触发异常。</param>
+            <param name="condition">条件</param>
+            <param name="message">解释异常的原因</param>
+            <param name="innerException">导致当前异常或空引用的异常</param>
+            <param name="state"></param>
+        </member>
+        <member name="M:LT.Guard.ParameterNotNull(System.Object,System.String,System.String,System.Exception)">
+            <summary>
+            验证参数不为空
+            </summary>
+            <param name="argumentValue">待验证的参数</param>
+            <param name="argumentName">参数名</param>
+            <param name="message">解释异常原因的错误消息</param>
+            <param name="innerException">导致当前异常或空引用的异常</param>
+        </member>
+        <member name="M:LT.Guard.NotEmptyOrNull(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            验证不为空或为空。
+            </summary>
+            <param name="argumentValue">参数值</param>
+            <param name="argumentName">参数名</param>
+            <param name="message">解释异常的原因</param>
+            <param name="innerException">导致当前异常或空引用的异常。</param>
+        </member>
+        <member name="M:LT.Guard.Extend``1(System.Func{System.String,System.Exception,System.Object,System.Exception})">
+            <summary>
+            扩展异常生成工厂。
+            </summary>
+            <typeparam name="T">异常类型</typeparam>
+            <param name="factory">异常工厂</param>
+        </member>
+        <member name="M:LT.Guard.Extend(System.Type,System.Func{System.String,System.Exception,System.Object,System.Exception})">
+            <summary>
+            扩展异常生成工厂。
+            </summary>
+            <param name="exception">异常类型</param>
+            <param name="factory">异常工厂</param>
+        </member>
+        <member name="T:LT.SortSet`2">
+            <summary>
+            Represents an ordered set, implemented by a jump list.
+            </summary>
+            <typeparam name="TElement">The element type.</typeparam>
+            <typeparam name="TScore">The score type.</typeparam>
+        </member>
+        <member name="M:LT.SortSet`2.#ctor(System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LT.SortSet`2"/> class.
+            </summary>
+            <param name="probable">Probability coefficient of possible number of level(0-1).</param>
+            <param name="maxLevel">The max level.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="probable"/>或<paramref name="maxLevel"/>不是有效值时引发.</exception>
+        </member>
+        <member name="M:LT.SortSet`2.#ctor(System.Collections.Generic.IComparer{`1},System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LT.SortSet`2"/> class.
+            </summary>
+            <param name="comparer">The comparer.</param>
+            <param name="probable">Probability coefficient of possible number of level(0-1).</param>
+            <param name="maxLevel">The max level.</param>
+        </member>
+        <member name="P:LT.SortSet`2.Count">
+            <summary>
+            Gets the element count.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.SyncRoot">
+            <summary>
+            Gets the sync lock.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.Item(System.Int32)">
+            <summary>
+            Get the element of the specified ranking.
+            </summary>
+            <param name="rank">The ranking(0 is the bottom).</param>
+            <returns>The element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Clear">
+            <summary>
+            Clear the sortset.
+            </summary>
+        </member>
+        <member name="M:LT.SortSet`2.ReverseIterator">
+            <summary>
+            Reverse traversal order.
+            </summary>
+        </member>
+        <member name="M:LT.SortSet`2.ReverseIterator(System.Boolean)">
+            <summary>
+            Reverse traversal order.
+            </summary>
+            <param name="forward">Whether to traverse from the forward.</param>
+        </member>
+        <member name="M:LT.SortSet`2.GetEnumerator">
+            <summary>
+            Gets the enumerator classes.
+            </summary>
+            <returns>Returns the enumerator classes.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.System#Collections#Generic#IEnumerable{TElement}#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.SortSet`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.SortSet`2.ToArray">
+            <summary>
+            Convert to array.
+            </summary>
+            <returns>An element array.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.First">
+            <summary>
+            Gets the first element.
+            </summary>
+            <returns>The first element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Last">
+            <summary>
+            Gets the last element.
+            </summary>
+            <returns>The last element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Shift">
+            <summary>
+            Remove and return the elements at the head.
+            </summary>
+            <returns>The first element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Pop">
+            <summary>
+            Remove and return the elements at the end.
+            </summary>
+            <returns>The last element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Add(`0,`1)">
+            <summary>
+            Add a new record in sortset.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="score">The score.</param>
+        </member>
+        <member name="M:LT.SortSet`2.Contains(`0)">
+            <summary>
+            Whether is contains the specided element.
+            </summary>
+            <param name="element">The element.</param>
+            <returns>True if contains the specided element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetScore(`0)">
+            <summary>
+            Gets the element's score.
+            </summary>
+            <param name="element">The element.</param>
+            <returns>The element's score.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetRangeCount(`1,`1)">
+            <summary>
+            Get the number of elements in the specified score range.
+            </summary>
+            <param name="start">The start score.(contain).</param>
+            <param name="end">The end score.(contain).</param>
+            <returns>The number of elements in the score range.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Remove(`0)">
+            <summary>
+            Remove an element from the sortset, return false if the element does not exist.
+            </summary>
+            <param name="element">The element.</param>
+            <returns>Whether is removed the element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.RemoveRangeByRank(System.Int32,System.Int32)">
+            <summary>
+            Remove elements from the rank range.
+            </summary>
+            <param name="startRank">The start rank.(contains, 0 bottom).</param>
+            <param name="stopRank">The end rank.(contains, 0 bottom).</param>
+            <returns>Returns the removed elements count.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.RemoveRangeByScore(`1,`1)">
+            <summary>
+            Remove elements from the score range.
+            </summary>
+            <param name="startScore">The start score.（contains）.</param>
+            <param name="stopScore">The end score.（contains）.</param>
+            <returns>Returns removed elements count.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetRank(`0)">
+            <summary>
+            Get specific element rank.
+            </summary>
+            <param name="element">The specific element.</param>
+            <returns>Returns the element rank(0 bottom) -1 means not found element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetRevRank(`0)">
+            <summary>
+            Get the reverse ranking of the specified element.
+            </summary>
+            <param name="element">The specified element.</param>
+            <returns>The element's rank(0 bottom)-1 means not found element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetElementRangeByRank(System.Int32,System.Int32)">
+            <summary>
+            Get the elements in the ranking range.
+            </summary>
+            <param name="startRank">The start rank(contains).</param>
+            <param name="stopRank">The stop rank(contains).</param>
+            <returns>An array of the elements.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetElementRangeByScore(`1,`1)">
+            <summary>
+            Get the elements in the score range.
+            </summary>
+            <param name="startScore">The start score（contains）.</param>
+            <param name="stopScore">The end score（contains）.</param>
+            <returns>An array of the elements.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetElementByRank(System.Int32)">
+            <summary>
+            Get element by rank.
+            </summary>
+            <param name="rank">The rank(0 bottom).</param>
+            <returns>The element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetElementByRevRank(System.Int32)">
+            <summary>
+            Get element by reverse rank.
+            </summary>
+            <param name="rank">The rank.(0 bottom).</param>
+            <returns>The element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.AddElement(`0,`1)">
+            <summary>
+            Add an element in the sortset.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="score">The score.</param>
+        </member>
+        <member name="M:LT.SortSet`2.Remove(LT.SortSet{`0,`1}.SkipNode,`0@)">
+            <summary>
+            Remove the skip node.
+            </summary>
+            <param name="node">The skip node.</param>
+            <param name="element">The removed element.</param>
+            <returns>Whether is removed the element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Remove(`0,`1)">
+            <summary>
+            Remove the skip node.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="score">The score.</param>
+            <returns>Whether is removed the element.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.GetRank(`0,`1)">
+            <summary>
+            Get the element rank.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="score">The element score.</param>
+            <returns>The element rank.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.IsFindNext(LT.SortSet{`0,`1}.SkipNode,`0,`1,System.Int32)">
+            <summary>
+            Determine if you need to find the next node.
+            </summary>
+            <param name="node">The skip not.</param>
+            <param name="element">The element.</param>
+            <param name="score">The element score.</param>
+            <param name="level">The level.</param>
+            <returns>True if find next.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.DeleteNode(LT.SortSet{`0,`1}.SkipNode,LT.SortSet{`0,`1}.SkipNode[])">
+            <summary>
+            Delete the skip node.
+            </summary>
+            <param name="cursor">The skip node.</param>
+            <param name="update">The updated node list.</param>
+        </member>
+        <member name="M:LT.SortSet`2.GetRandomLevel">
+            <summary>
+            Get the rand level.
+            </summary>
+            <returns>The rand level.</returns>
+        </member>
+        <member name="M:LT.SortSet`2.Compare(`1,`1)">
+            <summary>
+            Compare left and right values.
+            </summary>
+            <param name="left">The left value.</param>
+            <param name="right">The right value.</param>
+            <returns>Return a value indicating which value is larger.</returns>
+        </member>
+        <member name="T:LT.SortSet`2.Enumerator">
+            <summary>
+            The default enumerator.
+            </summary>
+        </member>
+        <member name="F:LT.SortSet`2.Enumerator.sortSet">
+            <summary>
+            The sorset instance.
+            </summary>
+        </member>
+        <member name="F:LT.SortSet`2.Enumerator.forward">
+            <summary>
+            Whether to traverse from the forward.
+            </summary>
+        </member>
+        <member name="F:LT.SortSet`2.Enumerator.current">
+            <summary>
+            The current node.
+            </summary>
+        </member>
+        <member name="M:LT.SortSet`2.Enumerator.#ctor(LT.SortSet{`0,`1},System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LT.SortSet`2.Enumerator"/> struct.
+            </summary>
+            <param name="sortSet">The sortset instnace.</param>
+            <param name="forward">Whether to traverse from the forward.</param>
+        </member>
+        <member name="P:LT.SortSet`2.Enumerator.Current">
+            <inheritdoc />
+        </member>
+        <member name="P:LT.SortSet`2.Enumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.SortSet`2.Enumerator.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.SortSet`2.Enumerator.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:LT.SortSet`2.Enumerator.System#Collections#IEnumerator#Reset">
+            <inheritdoc />
+        </member>
+        <member name="T:LT.SortSet`2.SkipNode">
+            <summary>
+            Represents a skip node.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.SkipNode.Element">
+            <summary>
+            Gets or sets the element.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.SkipNode.Score">
+            <summary>
+            Gets or sets the score.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.SkipNode.IsDeleted">
+            <summary>
+            Gets or sets a value indicating whether was deleted.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.SkipNode.Backward">
+            <summary>
+            Gets or sets the previous node.
+            </summary>
+        </member>
+        <member name="P:LT.SortSet`2.SkipNode.Level">
+            <summary>
+            Gets or sets the skip node levels.
+            </summary>
+        </member>
+        <member name="F:LT.SortSet`2.SkipNode.SkipNodeLevel.Forward">
+            <summary>
+            The next skip node.
+            </summary>
+        </member>
+        <member name="F:LT.SortSet`2.SkipNode.SkipNodeLevel.Span">
+            <summary>
+            The number represents how many nodes are crossed with the next node.
+            </summary>
+        </member>
+        <member name="T:LT.Str">
+            <summary>
+            String helper.
+            </summary>
+        </member>
+        <member name="F:LT.Str.Space">
+            <summary>
+            The space string.
+            </summary>
+        </member>
+        <member name="T:LT.Str.PadType">
+            <summary>
+            Fill types.
+            </summary>
+        </member>
+        <member name="F:LT.Str.PadType.Both">
+            <summary>
+            Fill both sides of the string. If it is not even, the right side gets extra padding.
+            </summary>
+        </member>
+        <member name="F:LT.Str.PadType.Left">
+            <summary>
+            Fill the left side of the string.
+            </summary>
+        </member>
+        <member name="F:LT.Str.PadType.Right">
+            <summary>
+            Fill the right side of the string.
+            </summary>
+        </member>
+        <member name="M:LT.Str.Method(System.String)">
+            <summary>
+            Get the function name expressed by the string.
+            </summary>
+            <param name="pattern">The string.</param>
+            <returns>The method name.</returns>
+        </member>
+        <member name="M:LT.Str.Is(System.String,System.String)">
+            <summary>
+            Translate the specified string into an asterisk match expression and test.
+            </summary>
+            <param name="pattern">The match pattern.</param>
+            <param name="value">The. </param>
+            <returns>True if matches.</returns>
+        </member>
+        <member name="M:LT.Str.Is``1(System.String[],``0)">
+            <summary>
+            Translate the specified string into an asterisk match expression and test.
+            <para>Returns true if any match patten matches.</para>
+            </summary>
+            <typeparam name="T">The type of source array.</typeparam>
+            <param name="patterns">The match pattern.</param>
+            <param name="source">The source array.</param>
+            <returns>True if matches.</returns>
+        </member>
+        <member name="M:LT.Str.AsteriskWildcard(System.String)">
+            <summary>
+            Translate the specified string into an asterisk match expression.
+            </summary>
+            <param name="pattern">The match pattern.</param>
+            <returns>Returns processed string.</returns>
+        </member>
+        <member name="M:LT.Str.Split(System.String,System.Int32)">
+            <summary>
+            Split a string into an array based on length.
+            </summary>
+            <param name="str">The specified string.</param>
+            <param name="length">Specify the length of each array element.</param>
+            <returns>Returns an array of the string.</returns>
+        </member>
+        <member name="M:LT.Str.Repeat(System.String,System.Int32)">
+            <summary>
+            Repeat the specified number of times the string.
+            </summary>
+            <param name="str">String that needs to be repeated.</param>
+            <param name="num">Number of repetitions.</param>
+            <returns>Return the repeated string.</returns>
+        </member>
+        <member name="M:LT.Str.Shuffle(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Disrupt all characters in the string.
+            </summary>
+            <param name="str">The specified string.</param>
+            <param name="seed">The random seed.</param>
+            <returns>Returns disrupted string.</returns>
+        </member>
+        <member name="M:LT.Str.SubstringCount(System.String,System.String,System.Int32,System.Nullable{System.Int32},System.StringComparison)">
+            <summary>
+            Calculate the number of times a substring appears in a string.
+            <para>This function does not count overlapping substrings.</para>
+            </summary>
+            <param name="str">The specified string.</param>
+            <param name="subStr">The substring.</param>
+            <param name="start">The starting position.</param>
+            <param name="length">The length to calculate.</param>
+            <param name="comparison">The string comparison.</param>
+            <returns>Returns the number of times a substring appears.</returns>
+        </member>
+        <member name="M:LT.Str.Reverse(System.String)">
+            <summary>
+            Reverse specified string.
+            </summary>
+            <param name="str">The specified string.</param>
+            <returns>Returns reversed string.</returns>
+        </member>
+        <member name="M:LT.Str.Pad(System.String,System.Int32,System.String,LT.Str.PadType)">
+            <summary>
+            Fill the string with the new length.
+            </summary>
+            <param name="str">The string to be filled.</param>
+            <param name="length">The new string length. If the value is less than the original length of the string, no action is taken.</param>
+            <param name="padStr">A string to be used for padding. The default is blank.</param>
+            <param name="type">
+            Fill in which side of the string.
+            <para><see cref="F:LT.Str.PadType.Both"/>Fill both sides of the string. If not even, get extra padding on the right side.</para>
+            <para><see cref="F:LT.Str.PadType.Left"/>Fill the left side of the string.</para>
+            <para><see cref="F:LT.Str.PadType.Right"/>Fill the right side of the string.</para>
+            </param>
+            <returns>Returns filled string.</returns>
+        </member>
+        <member name="M:LT.Str.Pad(System.Int32,System.String,System.String,LT.Str.PadType)">
+            <summary>
+            Fill the string with the new length.
+            </summary>
+            <param name="length">The new string length. If the value is less than the original length of the string, no action is taken.</param>
+            <param name="str">The string to be filled.</param>
+            <param name="padStr">A string to be used for padding. The default is blank.</param>
+            <param name="type">
+            Fill in which side of the string.
+            <para><see cref="F:LT.Str.PadType.Both"/>Fill both sides of the string. If not even, get extra padding on the right side.</para>
+            <para><see cref="F:LT.Str.PadType.Left"/>Fill the left side of the string.</para>
+            <para><see cref="F:LT.Str.PadType.Right"/>Fill the right side of the string.</para>
+            </param>
+            <returns>Returns filled string.</returns>
+        </member>
+        <member name="M:LT.Str.After(System.String,System.String)">
+            <summary>
+            Finds the specified value in the string and returns the rest.
+            <para>If not found, return the specified string itself.</para>
+            </summary>
+            <param name="str">The specified string.</param>
+            <param name="search">The search value.</param>
+            <returns>The remaining part.</returns>
+        </member>
+        <member name="M:LT.Str.Contains(System.String,System.String[])">
+            <summary>
+            Determine whether the specified string contains the specified substring.
+            <para>Substrings are case sensitive.</para>
+            <para></para>
+            </summary>
+            <param name="str">The specified string.</param>
+            <param name="needles">An array of the specified substring.</param>
+            <returns>True if contains substring.</returns>
+        </member>
+        <member name="M:LT.Str.Replace(System.String[],System.String,System.String)">
+            <summary>
+            Replace the match in the specified string.
+            </summary>
+            <param name="matches">An array of the match string.</param>
+            <param name="replace">The replacement value.</param>
+            <param name="str">The specified string.</param>
+            <returns>Returns the replacement string.</returns>
+        </member>
+        <member name="M:LT.Str.ReplaceFirst(System.String,System.String,System.String)">
+            <summary>
+            Replace the first occurrence of a match in the specified string.
+            <para>This function is case sensitive.</para>
+            </summary>
+            <param name="match">The match string.</param>
+            <param name="replace">The replacement value.</param>
+            <param name="str">The specified string.</param>
+            <returns>Returns the replacement string.</returns>
+        </member>
+        <member name="M:LT.Str.ReplaceLast(System.String,System.String,System.String)">
+            <summary>
+            Replaces the first occurrence of a match in the specified string from the back to the front.
+            <para>This function is case sensitive.</para>
+            </summary>
+            <param name="match">The match string.</param>
+            <param name="replace">The replacement value.</param>
+            <param name="str">The specified string.</param>
+            <returns>Returns the replacement string.</returns>
+        </member>
+        <member name="M:LT.Str.Random(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Generate a random letter (with case), a string of numbers.
+            </summary>
+            <param name="length">The length of the generate string.</param>
+            <param name="seed">The random seed.</param>
+            <returns>The random string.</returns>
+        </member>
+        <member name="M:LT.Str.Truncate(System.String,System.Int32,System.Object,System.String)">
+            <summary>
+            If the length exceeds the given maximum string length, the string is truncated.
+            The last character of the truncated string will be replaced with the mission string.
+            <para>eg: Str.Truncate("hello world , the sun is shine", 15, Str.Space) => hello world...</para>
+            </summary>
+            <param name="str">The string to be truncated.</param>
+            <param name="length">Truncation length (with default character length).</param>
+            <param name="separator">The adjacent separator, if set, truncates the separator position with the length of the truncation length, and uses a regular match if a regular expression is passed.</param>
+            <param name="mission">The mission string.</param>
+            <returns>Reutrns truncated string.</returns>
+        </member>
+        <member name="M:LT.Str.Levenshtein(System.String,System.String)">
+            <summary>
+            Calculate Levenshtein distance between two strings.
+            </summary>
+            <param name="str1">The string 1.</param>
+            <param name="str2">The string 2.</param>
+            <returns>
+            This function returns the Levenshtein-Distance between the two argument
+            strings or -1, if one of the argument strings is longer than the limit
+            of 255 characters.
+            </returns>
+        </member>
+        <member name="M:LT.Str.JoinList(System.String[],System.String)">
+            <summary>
+            Returns all sequential combination of the given array.
+            </summary>
+            <remarks>
+            v[0] = "hello"
+            v[1] = "world"
+            var result = Str.JoinList(v, "/");
+            result[0] == "hello";
+            result[1] == "hello/world";.
+            </remarks>
+            <param name="source">The source array.</param>
+            <param name="separator">The separator.</param>
+            <returns>The sequential combination array.</returns>
+        </member>
+        <member name="M:LT.Str.JoinList(System.String[],System.Char)">
+            <inheritdoc cref="M:LT.Str.JoinList(System.String[],System.Char)"/>
+        </member>
+        <member name="T:LT.Utility">
+            <summary>
+            通用支持
+            </summary>
+            <summary>
+            通用支持
+            </summary>
+            <summary>
+            通用支持
+            </summary>
+        </member>
+        <member name="T:LT.Utility.Assembly">
+            <summary>
+            程序集相关的实用函数。
+            </summary>
+        </member>
+        <member name="M:LT.Utility.Assembly.GetAssemblies">
+            <summary>
+            获取已加载的程序集。
+            </summary>
+            <returns>已加载的程序集。</returns>
+        </member>
+        <member name="M:LT.Utility.Assembly.GetTypes">
+            <summary>
+            获取已加载的程序集中的所有类型。
+            </summary>
+            <returns>已加载的程序集中的所有类型。</returns>
+        </member>
+        <member name="M:LT.Utility.Assembly.GetTypes(System.Collections.Generic.List{System.Type})">
+            <summary>
+            获取已加载的程序集中的所有类型。
+            </summary>
+            <param name="results">已加载的程序集中的所有类型。</param>
+        </member>
+        <member name="M:LT.Utility.Assembly.GetType(System.String)">
+            <summary>
+            获取已加载的程序集中的指定类型。
+            </summary>
+            <param name="typeName">要获取的类型名。</param>
+            <returns>已加载的程序集中的指定类型。</returns>
+        </member>
+        <member name="M:LT.Utility.MakeRandom(System.Nullable{System.Int32})">
+            <summary>
+            构建一个随机生成器
+            </summary>
+            <param name="seed">种子</param>
+            <returns>随机生成器</returns>
+        </member>
+        <member name="M:LT.Utility.MakeSeed">
+            <summary>
+            生成种子
+            </summary>
+            <returns>种子</returns>
+        </member>
+        <member name="M:LT.Utility.NormalizationPosition(System.Int32,System.Int32@,System.Nullable{System.Int32}@)">
+            <summary>
+            标准化位置
+            </summary>
+            <param name="sourceLength">源长度</param>
+            <param name="start">起始位置</param>
+            <param name="length">作用长度</param>
+        </member>
+        <member name="T:LT.Utility.Text">
+            <summary>
+            文本处理
+            </summary>
+        </member>
+        <member name="M:LT.Utility.Text.GetFullName(System.String)">
+            <summary>
+            根据类型名，获取完整名称
+            </summary>
+            <param name="className">类名</param>
+            <returns>完整名称</returns>
+        </member>
+        <member name="M:LT.Utility.Text.GetFullName``1(System.String)">
+            <summary>
+            根据类型和名称获取完整名称。
+            </summary>
+            <typeparam name="T">类型。</typeparam>
+            <param name="name">名称。</param>
+            <returns>完整名称。</returns>
+        </member>
+        <member name="M:LT.Utility.Text.GetFullName(System.Type,System.String)">
+            <summary>
+            根据类型和名称获取完整名称。
+            </summary>
+            <param name="type">类型。</param>
+            <param name="name">名称。</param>
+            <returns>完整名称。</returns>
+        </member>
+        <member name="T:LT.Version">
+            <summary>
+            版本（遵循semver）
+            </summary>
+        </member>
+        <member name="F:LT.Version.versionMatcher">
+            <summary>
+            版本匹配正则式
+            </summary>
+        </member>
+        <member name="P:LT.Version.VersionMatcher">
+            <summary>
+            版本匹配正则式
+            </summary>
+        </member>
+        <member name="F:LT.Version.version">
+            <summary>
+            原始版本信息
+            </summary>
+        </member>
+        <member name="F:LT.Version.current">
+            <summary>
+            版本信息
+            </summary>
+        </member>
+        <member name="T:LT.Version.VersionData">
+            <summary>
+            版本信息
+            </summary>
+        </member>
+        <member name="F:LT.Version.VersionData.Major">
+            <summary>
+            主版本号
+            </summary>
+        </member>
+        <member name="F:LT.Version.VersionData.Minor">
+            <summary>
+            次版本号
+            </summary>
+        </member>
+        <member name="F:LT.Version.VersionData.Revised">
+            <summary>
+            修订版本号
+            </summary>
+        </member>
+        <member name="F:LT.Version.VersionData.PreRelease">
+            <summary>
+            先行版本号
+            </summary>
+        </member>
+        <member name="F:LT.Version.VersionData.BuildMetadata">
+            <summary>
+            版本编译信息
+            </summary>
+        </member>
+        <member name="M:LT.Version.VersionData.#ctor(System.String)">
+            <summary>
+            版本信息
+            </summary>
+            <param name="version"></param>
+        </member>
+        <member name="M:LT.Version.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            构造一个版本
+            </summary>
+            <param name="major">主版本号</param>
+            <param name="minor">次版本号</param>
+            <param name="revised">修订版本号</param>
+        </member>
+        <member name="M:LT.Version.#ctor(System.String)">
+            <summary>
+            构造一个版本
+            </summary>
+            <param name="version">版本号</param>
+        </member>
+        <member name="M:LT.Version.Compare(System.String)">
+            <summary>
+            将当前版本和输入版本进行比较
+            <para>输入版本大于当前版本则返回<code>-1</code></para>
+            <para>输入版本等于当前版本则返回<code>0</code></para>
+            <para>输入版本小于当前版本则返回<code>1</code></para>
+            </summary>
+            <param name="version">输入版本</param>
+            <returns>比较结果</returns>
+        </member>
+        <member name="M:LT.Version.CompareBlock(System.String,System.String)">
+            <summary>
+            比较左值和右值
+            <para>如果左值大于右值那么返回1</para>
+            <para>如果左值等于右值那么返回0</para>
+            <para>如果左值小于右值那么返回-1</para>
+            </summary>
+            <param name="left">左值</param>
+            <param name="right">右值</param>
+        </member>
+        <member name="M:LT.Version.GuardVersion(System.String)">
+            <summary>
+            验证输入版本
+            </summary>
+            <param name="version">输入版本</param>
+        </member>
+        <member name="M:LT.Version.ToString">
+            <summary>
+            转为字符串
+            </summary>
+            <returns>版本信息</returns>
+        </member>
+    </members>
+</doc>
