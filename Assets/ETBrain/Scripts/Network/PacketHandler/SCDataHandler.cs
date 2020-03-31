@@ -33,6 +33,7 @@ namespace ETBrain
                             Fix64.FromRaw(objData.X),
                             Fix64.FromRaw(objData.Y),
                             Fix64.FromRaw(objData.Z));
+                        aircraft.r_isFire = objData.IsFire;
                     }
                 }
             }

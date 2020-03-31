@@ -64,6 +64,7 @@ namespace ETBrain
                 objData.X = aircraft.m_fixv3LogicPosition.x.RawValue;
                 objData.Y = aircraft.m_fixv3LogicPosition.y.RawValue;
                 objData.Z = aircraft.m_fixv3LogicPosition.z.RawValue;
+                objData.IsFire = aircraft.isFire;
                 dataRequest.Objs.Add(objData);
             }
 

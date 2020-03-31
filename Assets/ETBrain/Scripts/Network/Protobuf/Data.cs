@@ -24,16 +24,17 @@ namespace Msg {
     static DataReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgpkYXRhLnByb3RvEgNtc2ciKQoLRGF0YVJlcXVlc3QSGgoEb2JqcxgBIAMo",
-            "CzIMLm1zZy5PYmpEYXRhIioKDERhdGFSZXNwb25zZRIaCgRvYmpzGAEgAygL",
-            "MgwubXNnLk9iakRhdGEiPAoHT2JqRGF0YRIQCghzZXJpYWxJZBgBIAEoBRIJ",
-            "CgF4GAIgASgDEgkKAXkYAyABKAMSCQoBehgEIAEoA2IGcHJvdG8z"));
+            "CgpkYXRhLnByb3RvEgNtc2ciKQoLRGF0YVJlcXVlc3QSGgoEb2JqcxgCIAMo",
+            "CzIMLm1zZy5PYmpEYXRhIioKDERhdGFSZXNwb25zZRIaCgRvYmpzGAIgAygL",
+            "MgwubXNnLk9iakRhdGEiTAoHT2JqRGF0YRIQCghzZXJpYWxJZBgBIAEoBRIJ",
+            "CgF4GAIgASgDEgkKAXkYAyABKAMSCQoBehgEIAEoAxIOCgZpc0ZpcmUYBSAB",
+            "KAhiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.DataRequest), global::Msg.DataRequest.Parser, new[]{ "Objs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.DataResponse), global::Msg.DataResponse.Parser, new[]{ "Objs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ObjData), global::Msg.ObjData.Parser, new[]{ "SerialId", "X", "Y", "Z" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ObjData), global::Msg.ObjData.Parser, new[]{ "SerialId", "X", "Y", "Z", "IsFire" }, null, null, null)
           }));
     }
     #endregion
@@ -75,9 +76,9 @@ namespace Msg {
     }
 
     /// <summary>Field number for the "objs" field.</summary>
-    public const int ObjsFieldNumber = 1;
+    public const int ObjsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Msg.ObjData> _repeated_objs_codec
-        = pb::FieldCodec.ForMessage(10, global::Msg.ObjData.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Msg.ObjData.Parser);
     private readonly pbc::RepeatedField<global::Msg.ObjData> objs_ = new pbc::RepeatedField<global::Msg.ObjData>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Msg.ObjData> Objs {
@@ -151,7 +152,7 @@ namespace Msg {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
+          case 18: {
             objs_.AddEntriesFrom(input, _repeated_objs_codec);
             break;
           }
@@ -196,9 +197,9 @@ namespace Msg {
     }
 
     /// <summary>Field number for the "objs" field.</summary>
-    public const int ObjsFieldNumber = 1;
+    public const int ObjsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Msg.ObjData> _repeated_objs_codec
-        = pb::FieldCodec.ForMessage(10, global::Msg.ObjData.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Msg.ObjData.Parser);
     private readonly pbc::RepeatedField<global::Msg.ObjData> objs_ = new pbc::RepeatedField<global::Msg.ObjData>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Msg.ObjData> Objs {
@@ -272,7 +273,7 @@ namespace Msg {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
+          case 18: {
             objs_.AddEntriesFrom(input, _repeated_objs_codec);
             break;
           }
@@ -311,6 +312,7 @@ namespace Msg {
       x_ = other.x_;
       y_ = other.y_;
       z_ = other.z_;
+      isFire_ = other.isFire_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -363,6 +365,17 @@ namespace Msg {
       }
     }
 
+    /// <summary>Field number for the "isFire" field.</summary>
+    public const int IsFireFieldNumber = 5;
+    private bool isFire_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsFire {
+      get { return isFire_; }
+      set {
+        isFire_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ObjData);
@@ -380,6 +393,7 @@ namespace Msg {
       if (X != other.X) return false;
       if (Y != other.Y) return false;
       if (Z != other.Z) return false;
+      if (IsFire != other.IsFire) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -390,6 +404,7 @@ namespace Msg {
       if (X != 0L) hash ^= X.GetHashCode();
       if (Y != 0L) hash ^= Y.GetHashCode();
       if (Z != 0L) hash ^= Z.GetHashCode();
+      if (IsFire != false) hash ^= IsFire.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -419,6 +434,10 @@ namespace Msg {
         output.WriteRawTag(32);
         output.WriteInt64(Z);
       }
+      if (IsFire != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsFire);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -438,6 +457,9 @@ namespace Msg {
       }
       if (Z != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Z);
+      }
+      if (IsFire != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -461,6 +483,9 @@ namespace Msg {
       }
       if (other.Z != 0L) {
         Z = other.Z;
+      }
+      if (other.IsFire != false) {
+        IsFire = other.IsFire;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -487,6 +512,10 @@ namespace Msg {
           }
           case 32: {
             Z = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            IsFire = input.ReadBool();
             break;
           }
         }

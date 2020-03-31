@@ -14,6 +14,9 @@ namespace ETBrain
 
         protected List<Weapon> m_Weapons = new List<Weapon>();
 
+        public bool isFire = false;
+        public bool r_isFire = false;
+
         protected internal override void OnShow(object userData)
         {
             base.OnShow(userData);
@@ -63,16 +66,19 @@ namespace ETBrain
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
-            //if (Input.GetMouseButton(0))
-            //{
-            //    Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //    m_TargetPosition = new Vector3(point.x, 0f, point.z);
+            isFire = false;
+            if (Input.GetMouseButton(0))
+            {
+                isFire = true;
 
-            //    for (int i = 0; i < m_Weapons.Count; i++)
-            //    {
-            //        m_Weapons[i].TryAttack();
-            //    }
-            //}
+                Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                m_TargetPosition = new Vector3(point.x, 0f, point.z);
+
+                //for (int i = 0; i < m_Weapons.Count; i++)
+                //{
+                //    m_Weapons[i].TryAttack();
+                //}
+            }
 
             Vector3 direction = m_TargetPosition - CachedTransform.localPosition;
             if (direction.sqrMagnitude <= Vector3.kEpsilon)
@@ -103,10 +109,10 @@ namespace ETBrain
             base.UpdateLogic();
             //Log.Info("arcraft logic");
 
-            if (Input.GetMouseButton(0))
+            if (r_isFire)
             {
-                Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                m_TargetPosition = new Vector3(point.x, 0f, point.z);
+                //Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //m_TargetPosition = new Vector3(point.x, 0f, point.z);
 
                 for (int i = 0; i < m_Weapons.Count; i++)
                 {
