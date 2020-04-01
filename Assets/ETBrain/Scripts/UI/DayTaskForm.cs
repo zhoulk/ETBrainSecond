@@ -5,14 +5,14 @@ namespace ETBrain
 {
     public class DayTaskForm: UGuiForm
     {
-        private Button mCloseBtn;
-
         protected internal override void OnInit(object userData)
         {
             base.OnInit(userData);
-            mCloseBtn = CachedTransform.Find("DayTask/bg/closeBtn").GetComponent<Button>();
 
-            mCloseBtn.onClick.AddListener(OnCloseClick);
+            ButtonDefaultFocus("btn_start");
+
+            ButtonOnClick("btn_start", OnStartClick);
+            ButtonOnClick("closeBtn", OnCloseClick);
         }
 
         protected internal override void OnOpen(object userData)
@@ -23,6 +23,11 @@ namespace ETBrain
         void OnCloseClick()
         {
             GameEntry.UI.CloseUIForm(this);
+        }
+
+        void OnStartClick()
+        {
+
         }
     }
 }

@@ -11,6 +11,7 @@ namespace ETBrain
     public class ProcedureMain : ProcedureBase
     {
         bool m_changeToLevel;
+        bool m_changeToTileMap;
         int m_currentLevel;
 
         public static ProcedureMain Instance;
@@ -31,6 +32,7 @@ namespace ETBrain
             base.OnEnter(procedureOwner);
 
             m_changeToLevel = false;
+            m_changeToTileMap = false;
 
             if (procedureOwner.GetData<VarBool>(Constant.ProcedureData.Gaming) != null &&
                 procedureOwner.GetData<VarBool>(Constant.ProcedureData.Gaming).Value)
@@ -101,7 +103,13 @@ namespace ETBrain
             {
                 VarInt v_level = new VarInt(m_currentLevel);
                 procedureOwner.SetData<VarInt>(Constant.ProcedureData.GameLevel, v_level);
-                procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, 1);
+                procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, SceneId.AircraftScene);
+                ChangeState<ProcedureChangeScene>(procedureOwner);
+            }
+
+            if (m_changeToTileMap)
+            {
+                procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, SceneId.TilemapScene);
                 ChangeState<ProcedureChangeScene>(procedureOwner);
             }
         }
@@ -110,6 +118,11 @@ namespace ETBrain
         {
             m_currentLevel = level;
             m_changeToLevel = true;
+        }
+
+        public void JumpToTileMap()
+        {
+            m_changeToTileMap = true;
         }
 
         string GetDeviceCode()

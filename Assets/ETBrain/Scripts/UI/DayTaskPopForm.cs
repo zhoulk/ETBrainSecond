@@ -6,16 +6,18 @@ namespace ETBrain
     public class DayTaskPopForm: UGuiForm
     {
         private Button mCloseBtn;
-        private Button mStartBtn;
 
         protected internal override void OnInit(object userData)
         {
             base.OnInit(userData);
             mCloseBtn = CachedTransform.Find("mask").GetComponent<Button>();
-            mStartBtn = CachedTransform.Find("popout/btn_startTask").GetComponent<Button>();
 
-            mCloseBtn.onClick.AddListener(OnCloseClick);
-            mStartBtn.onClick.AddListener(OnStartClick);
+            //mCloseBtn.onClick.AddListener(OnCloseClick);
+            //mStartBtn.onClick.AddListener(OnStartClick);
+
+            ButtonDefaultFocus("btn_startTask");
+
+            ButtonOnClick("btn_startTask", OnStartClick);
         }
 
         protected internal override void OnOpen(object userData)

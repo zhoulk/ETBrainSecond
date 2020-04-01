@@ -154,10 +154,15 @@ namespace ETBrain
                 GameEntry.Scene.UnloadScene(loadedSceneAssetNames[i]);
             }
 
-            if (nextSceneId == 1)
+            if (nextSceneId == SceneId.AircraftScene)
             {
                 m_changeToGame = true;
                 GameEntry.Scene.LoadScene(AssetUtility.GetSceneAsset("game"), Constant.AssetPriority.SceneAsset, this);
+            }
+            else if (nextSceneId == SceneId.TilemapScene)
+            {
+                m_changeToGame = true;
+                GameEntry.Scene.LoadScene(AssetUtility.GetSceneAsset("tileMap"), Constant.AssetPriority.SceneAsset, this);
             }
             else
             {

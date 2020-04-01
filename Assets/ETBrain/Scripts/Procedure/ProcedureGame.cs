@@ -59,7 +59,7 @@ namespace ETBrain
 
             if (m_changeToMain)
             {
-                procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, 2);
+                procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, SceneId.MainScene);
                 procedureOwner.SetData<VarBool>(Constant.ProcedureData.Gaming, true);
                 ChangeState<ProcedureChangeScene>(procedureOwner);
             }

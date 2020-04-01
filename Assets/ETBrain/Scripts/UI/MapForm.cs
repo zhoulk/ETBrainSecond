@@ -178,8 +178,18 @@ namespace ETBrain
         void OnBtnLevelClick(int level)
         {
             Log.Info(level);
-            ProcedureMain.Instance.JumpToLevel(level);
-            GameEntry.UI.CloseUIForm(this);
+            if (level == 13)
+            {
+                ProcedureMain procedure = GameEntry.Procedure.CurrentProcedure as ProcedureMain;
+                procedure.JumpToLevel(level);
+                GameEntry.UI.CloseUIForm(this);
+            }
+            else if (level == 14)
+            {
+                ProcedureMain procedure = GameEntry.Procedure.CurrentProcedure as ProcedureMain;
+                procedure.JumpToTileMap();
+                GameEntry.UI.CloseUIForm(this);
+            }
         }
     }
 }
