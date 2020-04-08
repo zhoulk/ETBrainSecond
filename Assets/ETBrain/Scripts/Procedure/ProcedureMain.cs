@@ -12,6 +12,7 @@ namespace ETBrain
     {
         bool m_changeToLevel;
         bool m_changeToTileMap;
+        bool m_changeToCineMachine;
         int m_currentLevel;
 
         public static ProcedureMain Instance;
@@ -33,6 +34,7 @@ namespace ETBrain
 
             m_changeToLevel = false;
             m_changeToTileMap = false;
+            m_changeToCineMachine = false;
 
             if (procedureOwner.GetData<VarBool>(Constant.ProcedureData.Gaming) != null &&
                 procedureOwner.GetData<VarBool>(Constant.ProcedureData.Gaming).Value)
@@ -109,7 +111,17 @@ namespace ETBrain
 
             if (m_changeToTileMap)
             {
+                VarInt v_level = new VarInt(m_currentLevel);
+                procedureOwner.SetData<VarInt>(Constant.ProcedureData.GameLevel, v_level);
                 procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, SceneId.TilemapScene);
+                ChangeState<ProcedureChangeScene>(procedureOwner);
+            }
+
+            if (m_changeToCineMachine)
+            {
+                VarInt v_level = new VarInt(m_currentLevel);
+                procedureOwner.SetData<VarInt>(Constant.ProcedureData.GameLevel, v_level);
+                procedureOwner.SetData<VarInt>(Constant.ProcedureData.NextSceneId, SceneId.CineMachine);
                 ChangeState<ProcedureChangeScene>(procedureOwner);
             }
         }
@@ -123,6 +135,11 @@ namespace ETBrain
         public void JumpToTileMap()
         {
             m_changeToTileMap = true;
+        }
+
+        public void JumpToCineMachine()
+        {
+            m_changeToCineMachine = true;
         }
 
         string GetDeviceCode()

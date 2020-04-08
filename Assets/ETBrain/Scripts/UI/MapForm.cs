@@ -190,6 +190,12 @@ namespace ETBrain
                 procedure.JumpToTileMap();
                 GameEntry.UI.CloseUIForm(this);
             }
+            else if (level == 15)
+            {
+                ProcedureMain procedure = GameEntry.Procedure.CurrentProcedure as ProcedureMain;
+                procedure.JumpToCineMachine();
+                GameEntry.UI.CloseUIForm(this);
+            }
         }
     }
 }

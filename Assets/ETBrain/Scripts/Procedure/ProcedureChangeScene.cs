@@ -164,6 +164,11 @@ namespace ETBrain
                 m_changeToGame = true;
                 GameEntry.Scene.LoadScene(AssetUtility.GetSceneAsset("tileMap"), Constant.AssetPriority.SceneAsset, this);
             }
+            else if (nextSceneId == SceneId.CineMachine)
+            {
+                m_changeToGame = true;
+                GameEntry.Scene.LoadScene(AssetUtility.GetSceneAsset("cineMachine"), Constant.AssetPriority.SceneAsset, this);
+            }
             else
             {
                 GameEntry.Scene.LoadScene(AssetUtility.GetSceneAsset("main"), Constant.AssetPriority.SceneAsset, this);

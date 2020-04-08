@@ -19,5 +19,10 @@
         /// tilemap
         /// </summary>
         public static int TilemapScene = 3;
+
+        /// <summary>
+        /// CineMachine
+        /// </summary>
+        public static int CineMachine = 4;
     }
 }
